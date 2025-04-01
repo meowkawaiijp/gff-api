@@ -20,7 +20,7 @@
 
 ## ⚙️ 利用方法
 
-初めに、本リポジトリを複製するか、ダウンロードして展開してください。
+初めに、本リポジトリを複製するか、[こちら](https://github.com/ActiveTK/gff/archive/refs/heads/main.zip)からダウンロードして展開してください。
 
 ```bash
 git clone https://github.com/ActiveTK/gff

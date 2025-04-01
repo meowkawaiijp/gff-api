@@ -59,7 +59,7 @@ gff "削除したいファイルまたはディレクトリのパス"
 このプログラムは The MIT License の下で公開されています。
 
 © 2025 ActiveTK.  
-🔗 https://github.com/ActiveTK/GoodbyeFuckingFiles/blob/master/LICENSE
+🔗 https://github.com/ActiveTK/gff/blob/master/LICENSE
 
 ## 🛠️ 内部設定
 

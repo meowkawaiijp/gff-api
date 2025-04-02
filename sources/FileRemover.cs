@@ -30,7 +30,7 @@ namespace Goodbye_F__king_File
                 VerifyError = "ディレクトリが指定されています。ファイルを指定してください。";
                 return false;
             }
-            if (!File.Exists(@"\\?\" + _FilePath))
+            if (!File.Exists(_FilePath) && !File.Exists(@"\\?\" + _FilePath))
             {
                 VerifyError = "指定されたファイルが存在しません。";
                 return false;
@@ -107,6 +107,11 @@ namespace Goodbye_F__king_File
                 {
                     if (proc.MainModule.FileName.Equals(_FilePath, StringComparison.OrdinalIgnoreCase))
                     {
+                        if (proc.Id == Process.GetCurrentProcess().Id)
+                        {
+                            Logger.Log(Logger.LogType.WARN, $"このアプリ自身がファイルを使用中です。スキップします。");
+                            continue;
+                        }
                         Logger.Log(Logger.LogType.WARN, $"実行中のプロセス {proc.Id} ({proc.ProcessName}) がファイルを使用中です。強制終了を試みます...");
                         try
                         {
@@ -137,6 +142,12 @@ namespace Goodbye_F__king_File
                 foreach (var proc in lockingProcesses)
                 {
                     Logger.Log(Logger.LogType.WARN, $"プロセス {proc.Id} ({proc.ProcessName}) がファイルをロックしています。");
+
+                    if (proc.Id == Process.GetCurrentProcess().Id)
+                    {
+                        Logger.Log(Logger.LogType.WARN, $"このアプリ自身がファイルをロックしているため、スキップします。");
+                        continue;
+                    }
 
                     // まずはハンドル解放を試みる
                     bool handleClosed = FileLockHelper.ForceCloseFileHandle(proc, _FilePath);

@@ -84,7 +84,7 @@ namespace Goodbye_F__king_File
                 string IfDebug = Logger.ShowDebug ? "[DEBUG] " : "";
                 // スタート表示
                 Console.WriteLine("**********************************************************************");
-                Console.WriteLine("** Goodbye F**king Files " + IfDebug + "/ build 1 Apr, 2025");
+                Console.WriteLine("** Goodbye F**king Files " + IfDebug + "/ build 2 Apr, 2025");
                 Console.WriteLine("** (c) 2025 ActiveTK. <+activetk.jp>");
                 Console.WriteLine("** Released under the MIT License");
                 Console.WriteLine("**********************************************************************");

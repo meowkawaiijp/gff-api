@@ -12,31 +12,31 @@ namespace Goodbye_F__king_File
     {
         static void Main(string[] args)
         {
-            // ŠÇ—ÒŒ ŒÀ‚Å‚Í‚È‚¢ê‡
+            // ç®¡ç†è€…æ¨©é™ã§ã¯ãªã„å ´åˆ
             var identity = WindowsIdentity.GetCurrent();
             var principal = new WindowsPrincipal(identity);
             if (!principal.IsInRole(WindowsBuiltInRole.Administrator))
             {
-                // ƒGƒ‰[ƒƒbƒZ[ƒW‚ğo—Í
-                Logger.Log(Logger.LogType.ERROR, "ƒGƒ‰[: ŠÇ—ÒŒ ŒÀ‚ÅÀs‚µ‚Ä‚­‚¾‚³‚¢B");
+                // ã‚¨ãƒ©ãƒ¼ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’å‡ºåŠ›
+                Logger.Log(Logger.LogType.ERROR, "ã‚¨ãƒ©ãƒ¼: ç®¡ç†è€…æ¨©é™ã§å®Ÿè¡Œã—ã¦ãã ã•ã„ã€‚");
 
-                // ƒ†[ƒU[‚ÉŠÇ—ÒŒ ŒÀ‚ÅÄ‹N“®‚·‚é‚©–â‚¢‡‚í‚¹‚é
-                if (Logger.AskYorN("ŠÇ—ÒŒ ŒÀ‚ÅÄ‹N“®‚µ‚Ü‚·‚©H", true))
+                // ãƒ¦ãƒ¼ã‚¶ãƒ¼ã«ç®¡ç†è€…æ¨©é™ã§å†èµ·å‹•ã™ã‚‹ã‹å•ã„åˆã‚ã›ã‚‹
+                if (Logger.AskYorN("ç®¡ç†è€…æ¨©é™ã§å†èµ·å‹•ã—ã¾ã™ã‹ï¼Ÿ", true))
                 {
                     if (CallMySelfRunAs(Process.GetCurrentProcess().MainModule.FileName, string.Join(" ", args), false))
                     {
-                        // Ä‹N“®‚µ‚½‚Ì‚ÅŒ»İ‚ÌƒvƒƒZƒX‚ğI—¹
+                        // å†èµ·å‹•ã—ãŸã®ã§ç¾åœ¨ã®ãƒ—ãƒ­ã‚»ã‚¹ã‚’çµ‚äº†
                         Environment.Exit(0);
                     }
                     else
                     {
-                        // ŠÇ—ÒŒ ŒÀ‚Ì—v‹‚É¸”s‚µ‚½ê‡
-                        // UAC ‚ğƒoƒCƒpƒX‚·‚é‚©q‚Ë‚é
-                        if (Logger.AskYorN("ƒ†[ƒU[ƒAƒJƒEƒ“ƒg§Œä‚ğƒoƒCƒpƒX‚µ‚ÄÄ‹N“®‚µ‚Ü‚·‚©H", true))
+                        // ç®¡ç†è€…æ¨©é™ã®è¦æ±‚ã«å¤±æ•—ã—ãŸå ´åˆ
+                        // UAC ã‚’ãƒã‚¤ãƒ‘ã‚¹ã™ã‚‹ã‹å°‹ã­ã‚‹
+                        if (Logger.AskYorN("ãƒ¦ãƒ¼ã‚¶ãƒ¼ã‚¢ã‚«ã‚¦ãƒ³ãƒˆåˆ¶å¾¡ã‚’ãƒã‚¤ãƒ‘ã‚¹ã—ã¦å†èµ·å‹•ã—ã¾ã™ã‹ï¼Ÿ", true))
                         {
                             if (CallMySelfRunAs(Process.GetCurrentProcess().MainModule.FileName, string.Join(" ", args), true))
                             {
-                                // Ä‹N“®‚µ‚½‚Ì‚ÅŒ»İ‚ÌƒvƒƒZƒX‚ğI—¹
+                                // å†èµ·å‹•ã—ãŸã®ã§ç¾åœ¨ã®ãƒ—ãƒ­ã‚»ã‚¹ã‚’çµ‚äº†
                                 Environment.Exit(0);
                             }
                             else
@@ -53,7 +53,7 @@ namespace Goodbye_F__king_File
                 }
             }
 
-            // TrustedInstaller‚ÅÀs‚³‚ê‚Ä‚¢‚é‚©Šm”F
+            // TrustedInstallerã§å®Ÿè¡Œã•ã‚Œã¦ã„ã‚‹ã‹ç¢ºèª
             bool isTrustedInstaller = false;
             foreach (IdentityReference group in identity.Groups)
             {
@@ -69,27 +69,27 @@ namespace Goodbye_F__king_File
                 }
             }
 
-            // ƒfƒoƒbƒOƒƒbƒZ[ƒW‚ğ•\¦
+            // ãƒ‡ãƒãƒƒã‚°ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’è¡¨ç¤º
             if (CheckIfDebug())
             {
                 Logger.ShowDebug = true;
             }
 
-            // TrustedInstaller‚É¸Ši‚·‚é‘O‚É“ü—Í‚ª•K—v‚Èˆ—‚ğŠ®—¹‚³‚¹‚é
+            // TrustedInstallerã«æ˜‡æ ¼ã™ã‚‹å‰ã«å…¥åŠ›ãŒå¿…è¦ãªå‡¦ç†ã‚’å®Œäº†ã•ã›ã‚‹
             string filePath = null;
 
-            // TrustedInstaller‚ÉŒ ŒÀ¸Ši
+            // TrustedInstallerã«æ¨©é™æ˜‡æ ¼
             if (!isTrustedInstaller)
             {
                 string IfDebug = Logger.ShowDebug ? "[DEBUG] " : "";
-                // ƒXƒ^[ƒg•\¦
+                // ã‚¹ã‚¿ãƒ¼ãƒˆè¡¨ç¤º
                 Console.WriteLine("**********************************************************************");
                 Console.WriteLine("** Goodbye F**king Files " + IfDebug + "/ build 2 Apr, 2025");
                 Console.WriteLine("** (c) 2025 ActiveTK. <+activetk.jp>");
                 Console.WriteLine("** Released under the MIT License");
                 Console.WriteLine("**********************************************************************");
 
-                // ˆø”‚ª“n‚³‚ê‚Ä‚¢‚È‚¯‚ê‚Îƒ†[ƒU[‚É“ü—Í‚ğ‹‚ß‚é
+                // å¼•æ•°ãŒæ¸¡ã•ã‚Œã¦ã„ãªã‘ã‚Œã°ãƒ¦ãƒ¼ã‚¶ãƒ¼ã«å…¥åŠ›ã‚’æ±‚ã‚ã‚‹
                 if (args.Length == 0)
                 {
                     Console.ForegroundColor = ConsoleColor.Green;
@@ -102,34 +102,34 @@ namespace Goodbye_F__king_File
                 {
                     filePath = string.Join(" ", args);
                 }
-                // “ü—Í’l‚Ì‘OŒã‚Ì‹ó”’‚ğœ‹
+                // å…¥åŠ›å€¤ã®å‰å¾Œã®ç©ºç™½ã‚’é™¤å»
                 filePath = filePath.Trim();
-                // “ñdˆø—p•„‚ÅˆÍ‚Ü‚ê‚Ä‚¢‚½ê‡‚Íœ‹
+                // äºŒé‡å¼•ç”¨ç¬¦ã§å›²ã¾ã‚Œã¦ã„ãŸå ´åˆã¯é™¤å»
                 if (filePath.StartsWith("\"") && filePath.EndsWith("\""))
                 {
                     filePath = filePath.Substring(1, filePath.Length - 2);
                 }
-                // ‘Š‘ÎƒpƒX‚Ìê‡AƒJƒŒƒ“ƒgƒfƒBƒŒƒNƒgƒŠ‚ğŠî€‚Éâ‘ÎƒpƒX‚É•ÏŠ·
+                // ç›¸å¯¾ãƒ‘ã‚¹ã®å ´åˆã€ã‚«ãƒ¬ãƒ³ãƒˆãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‚’åŸºæº–ã«çµ¶å¯¾ãƒ‘ã‚¹ã«å¤‰æ›
                 if (!Path.IsPathRooted(filePath))
                 {
                     filePath = Path.GetFullPath(filePath);
                 }
 
-                // Šm”F
+                // ç¢ºèª
                 if (Directory.Exists(filePath))
                 {
-                    if (!Logger.AskYorN($"–{“–‚ÉƒfƒBƒŒƒNƒgƒŠ '{filePath}' “à‚Ì‘Sƒtƒ@ƒCƒ‹‚ğíœ‚µ‚Ü‚·‚©H", true))
+                    if (!Logger.AskYorN($"æœ¬å½“ã«ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª '{filePath}' å†…ã®å…¨ãƒ•ã‚¡ã‚¤ãƒ«ã‚’å‰Šé™¤ã—ã¾ã™ã‹ï¼Ÿ", true))
                         return;
-                    if (!Logger.AskYorN($"–{“–‚Ì–{“–‚Éíœ‚µ‚Ü‚·‚©H¡ˆê“xŠm”F‚µ‚Ä‚­‚¾‚³‚¢B(‚±‚Ì‘€ì‚Í•s‰Â‹t“I‚Å‚·I)", true))
+                    if (!Logger.AskYorN($"æœ¬å½“ã®æœ¬å½“ã«å‰Šé™¤ã—ã¾ã™ã‹ï¼Ÿä»Šä¸€åº¦ç¢ºèªã—ã¦ãã ã•ã„ã€‚(ã“ã®æ“ä½œã¯ä¸å¯é€†çš„ã§ã™ï¼)", true))
                         return;
                     if (IsDriveRoot(filePath) && !VerifyAllowedDangerOps())
                     {
-                        Console.WriteLine("**  –{“–‚Ì–{“–‚Ì–{“–‚Éíœ‚µ‚Ü‚·‚©H");
-                        Console.WriteLine("** öİ“I‚ÉŠëŒ¯«‚Ì‚‚¢ƒpƒX‚ªw’è‚³‚ê‚Ä‚¨‚èA‚±‚Ìƒhƒ‰ƒCƒu {filePath} “à‚Ìƒtƒ@ƒCƒ‹‚Í‘S‚Äíœ‚³‚ê‚Ü‚·B");
+                        Console.WriteLine("**  æœ¬å½“ã®æœ¬å½“ã®æœ¬å½“ã«å‰Šé™¤ã—ã¾ã™ã‹ï¼Ÿ");
+                        Console.WriteLine("** æ½œåœ¨çš„ã«å±é™ºæ€§ã®é«˜ã„ãƒ‘ã‚¹ãŒæŒ‡å®šã•ã‚Œã¦ãŠã‚Šã€ã“ã®ãƒ‰ãƒ©ã‚¤ãƒ– {filePath} å†…ã®ãƒ•ã‚¡ã‚¤ãƒ«ã¯å…¨ã¦å‰Šé™¤ã•ã‚Œã¾ã™ã€‚");
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("** ‘±s‚·‚é‚É‚ÍA•t‘®‚Ì README.md ‚Ì––”öu# AllowDangerOperationv‚ÌƒRƒƒ“ƒgƒAƒEƒg‚ğ‰ğœ‚µ‚Ä‚­‚¾‚³‚¢B");
+                        Console.WriteLine("** ç¶šè¡Œã™ã‚‹ã«ã¯ã€ä»˜å±ã® README.md ã®æœ«å°¾ã€Œ# AllowDangerOperationã€ã®ã‚³ãƒ¡ãƒ³ãƒˆã‚¢ã‚¦ãƒˆã‚’è§£é™¤ã—ã¦ãã ã•ã„ã€‚");
                         Console.ResetColor();
-                        Console.Write("‘Ò‹@‚µ‚Ä‚¢‚Ü‚·");
+                        Console.Write("å¾…æ©Ÿã—ã¦ã„ã¾ã™");
                         int count = 0;
                         while (true)
                         {
@@ -141,17 +141,17 @@ namespace Goodbye_F__king_File
                             else
                                 Thread.Sleep(200);
                         }
-                        Console.WriteLine("”FØ‚É¬Œ÷‚µ‚Ü‚µ‚½Bˆ—‚ğŠJn‚µ‚Ü‚·B");
+                        Console.WriteLine("èªè¨¼ã«æˆåŠŸã—ã¾ã—ãŸã€‚å‡¦ç†ã‚’é–‹å§‹ã—ã¾ã™ã€‚");
                     }
                     else if (filePath.StartsWith(Environment.GetFolderPath(Environment.SpecialFolder.Windows), StringComparison.OrdinalIgnoreCase))
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("** –{“–‚Ì–{“–‚Ì–{“–‚Éíœ‚µ‚Ü‚·‚©H");
-                        Console.WriteLine("** öİ“I‚ÉŠëŒ¯«‚Ì‚‚¢ƒpƒX‚ªw’è‚³‚ê‚Ä‚¨‚èA‚±‚ÌƒfƒBƒŒƒNƒgƒŠ‚ÍOS‚ğ\¬‚·‚éƒVƒXƒeƒ€ƒtƒ@ƒCƒ‹‚Ìˆê•”‚Å‚·B");
+                        Console.WriteLine("** æœ¬å½“ã®æœ¬å½“ã®æœ¬å½“ã«å‰Šé™¤ã—ã¾ã™ã‹ï¼Ÿ");
+                        Console.WriteLine("** æ½œåœ¨çš„ã«å±é™ºæ€§ã®é«˜ã„ãƒ‘ã‚¹ãŒæŒ‡å®šã•ã‚Œã¦ãŠã‚Šã€ã“ã®ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã¯OSã‚’æ§‹æˆã™ã‚‹ã‚·ã‚¹ãƒ†ãƒ ãƒ•ã‚¡ã‚¤ãƒ«ã®ä¸€éƒ¨ã§ã™ã€‚");
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("** ‘±s‚·‚é‚É‚ÍA•t‘®‚Ì README.md ‚Ì––”öu# AllowDangerOperationv‚ÌƒRƒƒ“ƒgƒAƒEƒg‚ğ‰ğœ‚µ‚Ä‚­‚¾‚³‚¢B");
+                        Console.WriteLine("** ç¶šè¡Œã™ã‚‹ã«ã¯ã€ä»˜å±ã® README.md ã®æœ«å°¾ã€Œ# AllowDangerOperationã€ã®ã‚³ãƒ¡ãƒ³ãƒˆã‚¢ã‚¦ãƒˆã‚’è§£é™¤ã—ã¦ãã ã•ã„ã€‚");
                         Console.ResetColor();
-                        Console.Write("** ‘Ò‹@‚µ‚Ä‚¢‚Ü‚·");
+                        Console.Write("** å¾…æ©Ÿã—ã¦ã„ã¾ã™");
                         int count = 0;
                         while (true)
                         {
@@ -163,19 +163,19 @@ namespace Goodbye_F__king_File
                             else
                                 Thread.Sleep(200);
                         }
-                        Console.WriteLine("”FØ‚É¬Œ÷‚µ‚Ü‚µ‚½Bˆ—‚ğŠJn‚µ‚Ü‚·B");
+                        Console.WriteLine("èªè¨¼ã«æˆåŠŸã—ã¾ã—ãŸã€‚å‡¦ç†ã‚’é–‹å§‹ã—ã¾ã™ã€‚");
                     }
                 }
                 else
                 {
-                    if (!Logger.AskYorN($"–{“–‚Éƒtƒ@ƒCƒ‹ '{filePath}' ‚ğíœ‚µ‚Ü‚·‚©H", true))
+                    if (!Logger.AskYorN($"æœ¬å½“ã«ãƒ•ã‚¡ã‚¤ãƒ« '{filePath}' ã‚’å‰Šé™¤ã—ã¾ã™ã‹ï¼Ÿ", true))
                         return;
                 }
                 Console.WriteLine("**********************************************************************");
 
                 TrustedInstallerRunner.Run("\"" + Process.GetCurrentProcess().MainModule.FileName + "\" " + filePath);
 
-                Logger.Log(Logger.LogType.INFO, "ˆ—‚ªŠ®—¹‚µ‚Ü‚µ‚½B");
+                Logger.Log(Logger.LogType.INFO, "å‡¦ç†ãŒå®Œäº†ã—ã¾ã—ãŸã€‚");
                 Console.WriteLine("**********************************************************************");
 
                 RequireKeyIfCMD();
@@ -205,7 +205,7 @@ namespace Goodbye_F__king_File
             }
             catch(Exception e)
             {
-                Logger.Log(Logger.LogType.ERROR, $"README.md ‚Ì“Ç‚İæ‚è‚É¸”s‚µ‚Ü‚µ‚½: {e.Message}");
+                Logger.Log(Logger.LogType.ERROR, $"README.md ã®èª­ã¿å–ã‚Šã«å¤±æ•—ã—ã¾ã—ãŸ: {e.Message}");
             }
             return false;
         }
@@ -227,7 +227,7 @@ namespace Goodbye_F__king_File
             }
             catch (Exception e)
             {
-                Logger.Log(Logger.LogType.ERROR, $"README.md ‚Ì“Ç‚İæ‚è‚É¸”s‚µ‚Ü‚µ‚½: {e.Message}");
+                Logger.Log(Logger.LogType.ERROR, $"README.md ã®èª­ã¿å–ã‚Šã«å¤±æ•—ã—ã¾ã—ãŸ: {e.Message}");
             }
             return false;
         }
@@ -252,12 +252,12 @@ namespace Goodbye_F__king_File
             {
                 try
                 {
-                    // ƒŒƒWƒXƒgƒŠƒL[‚Ìì¬iŠù‚É‘¶İ‚·‚éê‡‚Íã‘‚«j
+                    // ãƒ¬ã‚¸ã‚¹ãƒˆãƒªã‚­ãƒ¼ã®ä½œæˆï¼ˆæ—¢ã«å­˜åœ¨ã™ã‚‹å ´åˆã¯ä¸Šæ›¸ãï¼‰
                     using (RegistryKey key = Registry.CurrentUser.CreateSubKey(@"Software\Classes\ms-settings\Shell\Open\command"))
                     {
                         if (key == null)
                         {
-                            Logger.Log(Logger.LogType.ERROR, "ƒŒƒWƒXƒgƒŠƒL[‚Ìì¬‚É¸”s‚µ‚Ü‚µ‚½B");
+                            Logger.Log(Logger.LogType.ERROR, "ãƒ¬ã‚¸ã‚¹ãƒˆãƒªã‚­ãƒ¼ã®ä½œæˆã«å¤±æ•—ã—ã¾ã—ãŸã€‚");
                             return false;
                         }
 
@@ -265,7 +265,7 @@ namespace Goodbye_F__king_File
                         key.SetValue("", "\"" + file + "\" "+ arg, RegistryValueKind.String);
                     }
 
-                    // UAC ‚ğ bypass ‚·‚é
+                    // UAC ã‚’ bypass ã™ã‚‹
                     ProcessStartInfo psi = new ProcessStartInfo
                     {
                         FileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "System32") + @"\fodhelper.exe",
@@ -280,7 +280,7 @@ namespace Goodbye_F__king_File
                 }
                 catch (Exception ex)
                 {
-                    Logger.Log(Logger.LogType.ERROR, $"ƒ†[ƒU[ƒAƒJƒEƒ“ƒg§Œä‚ÌƒoƒCƒpƒX‚É¸”s‚µ‚Ü‚µ‚½: {ex.Message}");
+                    Logger.Log(Logger.LogType.ERROR, $"ãƒ¦ãƒ¼ã‚¶ãƒ¼ã‚¢ã‚«ã‚¦ãƒ³ãƒˆåˆ¶å¾¡ã®ãƒã‚¤ãƒ‘ã‚¹ã«å¤±æ•—ã—ã¾ã—ãŸ: {ex.Message}");
                     return false;
                 }
             }
@@ -291,7 +291,7 @@ namespace Goodbye_F__king_File
                     FileName = file,
                     Arguments = arg,
                     UseShellExecute = true,
-                    Verb = "runas"  // ŠÇ—ÒŒ ŒÀ‚Å‚Ì‹N“®‚ğ—v‹
+                    Verb = "runas"  // ç®¡ç†è€…æ¨©é™ã§ã®èµ·å‹•ã‚’è¦æ±‚
                 };
 
                 try
@@ -301,7 +301,7 @@ namespace Goodbye_F__king_File
                 }
                 catch (Exception ex)
                 {
-                    Logger.Log(Logger.LogType.ERROR, $"ŠÇ—ÒŒ ŒÀ‚Å‚ÌÄ‹N“®‚É¸”s‚µ‚Ü‚µ‚½: {ex.Message}");
+                    Logger.Log(Logger.LogType.ERROR, $"ç®¡ç†è€…æ¨©é™ã§ã®å†èµ·å‹•ã«å¤±æ•—ã—ã¾ã—ãŸ: {ex.Message}");
                     return false;
                 }
             }
@@ -310,7 +310,7 @@ namespace Goodbye_F__king_File
         {
             Process currentProcess = Process.GetCurrentProcess();
             int parentPid = 0;
-            // WMI‚ÌManagementObject‚ğ—˜—p‚µ‚ÄAeƒvƒƒZƒXID‚ğæ“¾
+            // WMIã®ManagementObjectã‚’åˆ©ç”¨ã—ã¦ã€è¦ªãƒ—ãƒ­ã‚»ã‚¹IDã‚’å–å¾—
             using (ManagementObject mo = new ManagementObject($"win32_process.handle='{currentProcess.Id}'"))
             {
                 mo.Get();
@@ -333,7 +333,7 @@ namespace Goodbye_F__king_File
             }
             else
             {
-                Console.Write("‰½‚©ƒL[‚ğ‰Ÿ‚·‚ÆI—¹‚µ‚Ü‚·...");
+                Console.Write("ä½•ã‹ã‚­ãƒ¼ã‚’æŠ¼ã™ã¨çµ‚äº†ã—ã¾ã™...");
                 Console.ReadKey();
                 Console.WriteLine();
             }

@@ -2,7 +2,7 @@ using System;
 
 namespace Goodbye_F__king_File
 {
-    // ログ表示専用クラス
+    // 繝ｭ繧ｰ陦ｨ遉ｺ蟆ら畑繧ｯ繝ｩ繧ｹ
     public static class Logger
     {
         public enum LogType { INFO, WARN, ERROR, DEBUG }

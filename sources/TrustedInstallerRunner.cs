@@ -10,7 +10,7 @@ namespace Goodbye_F__king_File
 {
     public class TrustedInstallerRunner
     {
-        // ’è”’è‹`
+        // å®šæ•°å®šç¾©
         const uint TOKEN_ADJUST_PRIVILEGES = 0x20;
         const uint TOKEN_QUERY = 0x8;
         const uint SE_PRIVILEGE_ENABLED = 0x2;
@@ -29,7 +29,7 @@ namespace Goodbye_F__king_File
         const uint HANDLE_FLAG_INHERIT = 0x00000001;
         const uint INFINITE = 0xFFFFFFFF;
 
-        #region STRUCT’è‹`
+        #region STRUCTå®šç¾©
 
         [StructLayout(LayoutKind.Sequential)]
         public struct LUID
@@ -126,7 +126,7 @@ namespace Goodbye_F__king_File
 
         #endregion
 
-        #region ”X‚Ìdll‚ğƒCƒ“ƒ|[ƒg
+        #region è«¸ã€…ã®dllã‚’ã‚¤ãƒ³ãƒãƒ¼ãƒˆ
 
         [DllImport("advapi32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         static extern bool OpenProcessToken(IntPtr ProcessHandle, uint DesiredAccess, out IntPtr TokenHandle);
@@ -188,19 +188,19 @@ namespace Goodbye_F__king_File
 
         #endregion
 
-        #region “à•”ˆ—
+        #region å†…éƒ¨å‡¦ç†
 
-        // •K—v‚È“ÁŒ ‚ğ—LŒø‰»‚·‚é
+        // å¿…è¦ãªç‰¹æ¨©ã‚’æœ‰åŠ¹åŒ–ã™ã‚‹
         static bool EnablePrivilege(string privilegeName)
         {
             if (!OpenProcessToken(System.Diagnostics.Process.GetCurrentProcess().Handle, TOKEN_ADJUST_PRIVILEGES | TOKEN_QUERY, out IntPtr hToken))
             {
-                Logger.Log(Logger.LogType.ERROR, $"[EnablePrivilege] OpenProcessToken‚ÌÀs‚É¸”s‚µ‚Ü‚µ‚½ (“ÁŒ : {privilegeName})BƒGƒ‰[: {Marshal.GetLastWin32Error()}");
+                Logger.Log(Logger.LogType.ERROR, $"[EnablePrivilege] OpenProcessTokenã®å®Ÿè¡Œã«å¤±æ•—ã—ã¾ã—ãŸ (ç‰¹æ¨©: {privilegeName})ã€‚ã‚¨ãƒ©ãƒ¼: {Marshal.GetLastWin32Error()}");
                 return false;
             }
             if (!LookupPrivilegeValue(null, privilegeName, out LUID luid))
             {
-                Logger.Log(Logger.LogType.ERROR, $"[EnablePrivilege] LookupPrivilegeValue‚ÌÀs‚É¸”s‚µ‚Ü‚µ‚½ (“ÁŒ : {privilegeName})BƒGƒ‰[: {Marshal.GetLastWin32Error()}");
+                Logger.Log(Logger.LogType.ERROR, $"[EnablePrivilege] LookupPrivilegeValueã®å®Ÿè¡Œã«å¤±æ•—ã—ã¾ã—ãŸ (ç‰¹æ¨©: {privilegeName})ã€‚ã‚¨ãƒ©ãƒ¼: {Marshal.GetLastWin32Error()}");
                 CloseHandle(hToken);
                 return false;
             }
@@ -214,22 +214,22 @@ namespace Goodbye_F__king_File
 
             if (!AdjustTokenPrivileges(hToken, false, ref tp, (uint)Marshal.SizeOf(typeof(TOKEN_PRIVILEGES)), IntPtr.Zero, IntPtr.Zero))
             {
-                Logger.Log(Logger.LogType.ERROR, $"[EnablePrivilege] AdjustTokenPrivileges‚ÌÀs‚É¸”s‚µ‚Ü‚µ‚½ (“ÁŒ : {privilegeName})BƒGƒ‰[: {Marshal.GetLastWin32Error()}");
+                Logger.Log(Logger.LogType.ERROR, $"[EnablePrivilege] AdjustTokenPrivilegesã®å®Ÿè¡Œã«å¤±æ•—ã—ã¾ã—ãŸ (ç‰¹æ¨©: {privilegeName})ã€‚ã‚¨ãƒ©ãƒ¼: {Marshal.GetLastWin32Error()}");
                 CloseHandle(hToken);
                 return false;
             }
             CloseHandle(hToken);
-            Logger.Log(Logger.LogType.DEBUG, $"[EnablePrivilege] “ÁŒ  {privilegeName} ‚ğ³í‚É—LŒø‰»‚µ‚Ü‚µ‚½B");
+            Logger.Log(Logger.LogType.DEBUG, $"[EnablePrivilege] ç‰¹æ¨© {privilegeName} ã‚’æ­£å¸¸ã«æœ‰åŠ¹åŒ–ã—ã¾ã—ãŸã€‚");
             return true;
         }
 
-        // w’èƒvƒƒZƒX–¼‚©‚çƒvƒƒZƒXID‚ğæ“¾iŒ©‚Â‚©‚ç‚È‚¯‚ê‚Î0‚ğ•Ô‚·j
+        // æŒ‡å®šãƒ—ãƒ­ã‚»ã‚¹åã‹ã‚‰ãƒ—ãƒ­ã‚»ã‚¹IDã‚’å–å¾—ï¼ˆè¦‹ã¤ã‹ã‚‰ãªã‘ã‚Œã°0ã‚’è¿”ã™ï¼‰
         static uint GetProcessIdByName(string processName)
         {
             IntPtr hSnapshot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
             if (hSnapshot == (IntPtr)(-1))
             {
-                Logger.Log(Logger.LogType.ERROR, $"[GetProcessIdByName] CreateToolhelp32Snapshot‚ÌÀs‚É¸”s‚µ‚Ü‚µ‚½BƒGƒ‰[: {Marshal.GetLastWin32Error()}");
+                Logger.Log(Logger.LogType.ERROR, $"[GetProcessIdByName] CreateToolhelp32Snapshotã®å®Ÿè¡Œã«å¤±æ•—ã—ã¾ã—ãŸã€‚ã‚¨ãƒ©ãƒ¼: {Marshal.GetLastWin32Error()}");
                 return 0;
             }
 
@@ -248,34 +248,34 @@ namespace Goodbye_F__king_File
             }
             else
             {
-                Logger.Log(Logger.LogType.ERROR, $"[GetProcessIdByName] Process32First‚ÌÀs‚É¸”s‚µ‚Ü‚µ‚½BƒGƒ‰[: {Marshal.GetLastWin32Error()}");
+                Logger.Log(Logger.LogType.ERROR, $"[GetProcessIdByName] Process32Firstã®å®Ÿè¡Œã«å¤±æ•—ã—ã¾ã—ãŸã€‚ã‚¨ãƒ©ãƒ¼: {Marshal.GetLastWin32Error()}");
                 CloseHandle(hSnapshot);
                 return 0;
             }
             CloseHandle(hSnapshot);
             if (pid == 0)
-                Logger.Log(Logger.LogType.ERROR, $"[GetProcessIdByName] ƒvƒƒZƒX‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ‚Å‚µ‚½: {processName}");
+                Logger.Log(Logger.LogType.ERROR, $"[GetProcessIdByName] ãƒ—ãƒ­ã‚»ã‚¹ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã§ã—ãŸ: {processName}");
             return pid;
         }
 
-        // winlogon.exe ‚Ìƒg[ƒNƒ“‚ğ—p‚¢‚ÄƒVƒXƒeƒ€‚ÌƒCƒ“ƒp[ƒ\ƒl[ƒVƒ‡ƒ“‚ğs‚¤
+        // winlogon.exe ã®ãƒˆãƒ¼ã‚¯ãƒ³ã‚’ç”¨ã„ã¦ã‚·ã‚¹ãƒ†ãƒ ã®ã‚¤ãƒ³ãƒ‘ãƒ¼ã‚½ãƒãƒ¼ã‚·ãƒ§ãƒ³ã‚’è¡Œã†
         static void ImpersonateSystem()
         {
             uint systemPid = GetProcessIdByName("winlogon.exe");
             if (systemPid == 0)
             {
-                Logger.Log(Logger.LogType.ERROR, "[ImpersonateSystem] winlogon.exe‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ‚Å‚µ‚½B");
+                Logger.Log(Logger.LogType.ERROR, "[ImpersonateSystem] winlogon.exeãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã§ã—ãŸã€‚");
                 return;
             }
             IntPtr hSystemProcess = OpenProcess(PROCESS_DUP_HANDLE | PROCESS_QUERY_INFORMATION, false, systemPid);
             if (hSystemProcess == IntPtr.Zero)
             {
-                Logger.Log(Logger.LogType.ERROR, $"[ImpersonateSystem] OpenProcess‚ÌÀs‚É¸”s‚µ‚Ü‚µ‚½ (winlogon.exe)BƒGƒ‰[: {Marshal.GetLastWin32Error()}");
+                Logger.Log(Logger.LogType.ERROR, $"[ImpersonateSystem] OpenProcessã®å®Ÿè¡Œã«å¤±æ•—ã—ã¾ã—ãŸ (winlogon.exe)ã€‚ã‚¨ãƒ©ãƒ¼: {Marshal.GetLastWin32Error()}");
                 return;
             }
             if (!OpenProcessToken(hSystemProcess, MAXIMUM_ALLOWED, out IntPtr hSystemToken))
             {
-                Logger.Log(Logger.LogType.ERROR, $"[ImpersonateSystem] OpenProcessToken‚ÌÀs‚É¸”s‚µ‚Ü‚µ‚½ (winlogon.exe)BƒGƒ‰[: {Marshal.GetLastWin32Error()}");
+                Logger.Log(Logger.LogType.ERROR, $"[ImpersonateSystem] OpenProcessTokenã®å®Ÿè¡Œã«å¤±æ•—ã—ã¾ã—ãŸ (winlogon.exe)ã€‚ã‚¨ãƒ©ãƒ¼: {Marshal.GetLastWin32Error()}");
                 CloseHandle(hSystemProcess);
                 return;
             }
@@ -287,33 +287,33 @@ namespace Goodbye_F__king_File
             };
             if (!DuplicateTokenEx(hSystemToken, MAXIMUM_ALLOWED, ref sa, 2 /* SecurityImpersonation */, 2 /* TokenImpersonation */, out IntPtr hDupToken))
             {
-                Logger.Log(Logger.LogType.ERROR, $"[ImpersonateSystem] DuplicateTokenEx‚ÌÀs‚É¸”s‚µ‚Ü‚µ‚½ (winlogon.exe)BƒGƒ‰[: {Marshal.GetLastWin32Error()}");
+                Logger.Log(Logger.LogType.ERROR, $"[ImpersonateSystem] DuplicateTokenExã®å®Ÿè¡Œã«å¤±æ•—ã—ã¾ã—ãŸ (winlogon.exe)ã€‚ã‚¨ãƒ©ãƒ¼: {Marshal.GetLastWin32Error()}");
                 CloseHandle(hSystemToken);
                 CloseHandle(hSystemProcess);
                 return;
             }
             if (!ImpersonateLoggedOnUser(hDupToken))
             {
-                Logger.Log(Logger.LogType.ERROR, $"[ImpersonateSystem] ImpersonateLoggedOnUser‚ÌÀs‚É¸”s‚µ‚Ü‚µ‚½BƒGƒ‰[: {Marshal.GetLastWin32Error()}");
+                Logger.Log(Logger.LogType.ERROR, $"[ImpersonateSystem] ImpersonateLoggedOnUserã®å®Ÿè¡Œã«å¤±æ•—ã—ã¾ã—ãŸã€‚ã‚¨ãƒ©ãƒ¼: {Marshal.GetLastWin32Error()}");
             }
             else
             {
-                Logger.Log(Logger.LogType.INFO, "[ImpersonateSystem] ƒVƒXƒeƒ€‚ÌƒCƒ“ƒp[ƒ\ƒl[ƒVƒ‡ƒ“‚É¬Œ÷‚µ‚Ü‚µ‚½B(SeDebugPrivilege/SeImpersonatePrivilege)");
+                Logger.Log(Logger.LogType.INFO, "[ImpersonateSystem] ã‚·ã‚¹ãƒ†ãƒ ã®ã‚¤ãƒ³ãƒ‘ãƒ¼ã‚½ãƒãƒ¼ã‚·ãƒ§ãƒ³ã«æˆåŠŸã—ã¾ã—ãŸã€‚(SeDebugPrivilege/SeImpersonatePrivilege)");
             }
             CloseHandle(hDupToken);
             CloseHandle(hSystemToken);
             CloseHandle(hSystemProcess);
         }
 
-        // TrustedInstallerƒT[ƒrƒX‚ğŠJn‚µAƒvƒƒZƒXID‚ğ•Ô‚·
+        // TrustedInstallerã‚µãƒ¼ãƒ“ã‚¹ã‚’é–‹å§‹ã—ã€ãƒ—ãƒ­ã‚»ã‚¹IDã‚’è¿”ã™
         static uint StartTrustedInstallerService()
         {
-            Logger.Log(Logger.LogType.DEBUG, "[StartTrustedInstallerService] ƒT[ƒrƒXƒRƒ“ƒgƒ[ƒ‹ƒ}ƒl[ƒWƒƒ[‚ğƒI[ƒvƒ“’†...");
+            Logger.Log(Logger.LogType.DEBUG, "[StartTrustedInstallerService] ã‚µãƒ¼ãƒ“ã‚¹ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼ã‚’ã‚ªãƒ¼ãƒ—ãƒ³ä¸­...");
             IntPtr hSCManager = OpenSCManager(null, "ServicesActive", GENERIC_EXECUTE_SC_MANAGER);
             if (hSCManager == IntPtr.Zero)
                 throw new Win32Exception(Marshal.GetLastWin32Error(), "OpenSCManager failed");
 
-            Logger.Log(Logger.LogType.DEBUG, "[StartTrustedInstallerService] TrustedInstallerƒT[ƒrƒX‚ğƒI[ƒvƒ“’†...");
+            Logger.Log(Logger.LogType.DEBUG, "[StartTrustedInstallerService] TrustedInstallerã‚µãƒ¼ãƒ“ã‚¹ã‚’ã‚ªãƒ¼ãƒ—ãƒ³ä¸­...");
             IntPtr hService = OpenService(hSCManager, "TrustedInstaller", GENERIC_READ | GENERIC_EXECUTE);
             if (hService == IntPtr.Zero)
             {
@@ -331,27 +331,27 @@ namespace Goodbye_F__king_File
                 while (QueryServiceStatusEx(hService, SC_STATUS_PROCESS_INFO, pStatus, (uint)sspSize, out bytesNeeded))
                 {
                     ssp = Marshal.PtrToStructure<SERVICE_STATUS_PROCESS>(pStatus);
-                    Logger.Log(Logger.LogType.DEBUG, $"[StartTrustedInstallerService] ƒT[ƒrƒX‚ÌŒ»İ‚Ìó‘Ô: {ssp.dwCurrentState}");
-                    // ƒT[ƒrƒX‚ª’â~‚µ‚Ä‚¢‚éê‡‚Í‹N“®‚·‚é
+                    Logger.Log(Logger.LogType.DEBUG, $"[StartTrustedInstallerService] ã‚µãƒ¼ãƒ“ã‚¹ã®ç¾åœ¨ã®çŠ¶æ…‹: {ssp.dwCurrentState}");
+                    // ã‚µãƒ¼ãƒ“ã‚¹ãŒåœæ­¢ã—ã¦ã„ã‚‹å ´åˆã¯èµ·å‹•ã™ã‚‹
                     if (ssp.dwCurrentState == 1) // SERVICE_STOPPED
                     {
-                        Logger.Log(Logger.LogType.WARN, "[StartTrustedInstallerService] ƒT[ƒrƒX‚Í’â~’†‚Å‚·B‹N“®‚ğ‚İ‚Ü‚·...");
+                        Logger.Log(Logger.LogType.WARN, "[StartTrustedInstallerService] ã‚µãƒ¼ãƒ“ã‚¹ã¯åœæ­¢ä¸­ã§ã™ã€‚èµ·å‹•ã‚’è©¦ã¿ã¾ã™...");
                         if (!StartService(hService, 0, null))
                         {
                             throw new Win32Exception(Marshal.GetLastWin32Error(), "StartService failed");
                         }
                     }
-                    // ƒT[ƒrƒXŠJn’†‚Ìê‡‚Í‘Ò‹@‚·‚é
+                    // ã‚µãƒ¼ãƒ“ã‚¹é–‹å§‹ä¸­ã®å ´åˆã¯å¾…æ©Ÿã™ã‚‹
                     if (ssp.dwCurrentState == 2 /* SERVICE_START_PENDING */ ||
                         ssp.dwCurrentState == 3 /* SERVICE_STOP_PENDING */)
                     {
-                        Logger.Log(Logger.LogType.DEBUG, $"[StartTrustedInstallerService] ƒT[ƒrƒX‚Ìó‘Ô‚Í•Û—¯’†‚Å‚·B{ssp.dwWaitHint} ms‘Ò‹@’†...");
+                        Logger.Log(Logger.LogType.DEBUG, $"[StartTrustedInstallerService] ã‚µãƒ¼ãƒ“ã‚¹ã®çŠ¶æ…‹ã¯ä¿ç•™ä¸­ã§ã™ã€‚{ssp.dwWaitHint} mså¾…æ©Ÿä¸­...");
                         Thread.Sleep((int)ssp.dwWaitHint);
                         continue;
                     }
                     if (ssp.dwCurrentState == 4) // SERVICE_RUNNING
                     {
-                        Logger.Log(Logger.LogType.INFO, $"[StartTrustedInstallerService] ƒT[ƒrƒX‚ÍÀs’†‚Å‚·BPID: {ssp.dwProcessId}");
+                        Logger.Log(Logger.LogType.INFO, $"[StartTrustedInstallerService] ã‚µãƒ¼ãƒ“ã‚¹ã¯å®Ÿè¡Œä¸­ã§ã™ã€‚PID: {ssp.dwProcessId}");
                         return ssp.dwProcessId;
                     }
                 }
@@ -369,31 +369,31 @@ namespace Goodbye_F__king_File
             throw new Win32Exception(Marshal.GetLastWin32Error(), "QueryServiceStatusEx failed");
         }
 
-        // TrustedInstallerƒvƒƒZƒX‚Ìƒg[ƒNƒ“‚ğ—p‚¢‚ÄƒRƒ}ƒ“ƒh‚ğÀs‚µA
-        // •W€o—Í^ƒGƒ‰[‚ÌƒŠƒ_ƒCƒŒƒNƒg—p‚É“½–¼ƒpƒCƒv‚ğì¬‚µAhReadPipe‚ğ•Ô‚·B
-        // ¸”s‚ÍPROCESS_INFORMATION.hProcess==IntPtr.Zero
+        // TrustedInstallerãƒ—ãƒ­ã‚»ã‚¹ã®ãƒˆãƒ¼ã‚¯ãƒ³ã‚’ç”¨ã„ã¦ã‚³ãƒãƒ³ãƒ‰ã‚’å®Ÿè¡Œã—ã€
+        // æ¨™æº–å‡ºåŠ›ï¼ã‚¨ãƒ©ãƒ¼ã®ãƒªãƒ€ã‚¤ãƒ¬ã‚¯ãƒˆç”¨ã«åŒ¿åãƒ‘ã‚¤ãƒ—ã‚’ä½œæˆã—ã€hReadPipeã‚’è¿”ã™ã€‚
+        // å¤±æ•—æ™‚ã¯PROCESS_INFORMATION.hProcess==IntPtr.Zero
         static PROCESS_INFORMATION CreateProcessAsTrustedInstaller(uint trustedInstallerPid, string commandLine, out IntPtr hReadPipe)
         {
             hReadPipe = IntPtr.Zero;
             PROCESS_INFORMATION pi = new PROCESS_INFORMATION();
-            // •K—v‚È“ÁŒ ‚ğ—LŒø‰»
+            // å¿…è¦ãªç‰¹æ¨©ã‚’æœ‰åŠ¹åŒ–
             if (!EnablePrivilege("SeDebugPrivilege") || !EnablePrivilege("SeImpersonatePrivilege"))
             {
-                Logger.Log(Logger.LogType.ERROR, "[CreateProcessAsTrustedInstaller] •K—v‚È“ÁŒ ‚Ì—LŒø‰»‚É¸”s‚µ‚Ü‚µ‚½B");
+                Logger.Log(Logger.LogType.ERROR, "[CreateProcessAsTrustedInstaller] å¿…è¦ãªç‰¹æ¨©ã®æœ‰åŠ¹åŒ–ã«å¤±æ•—ã—ã¾ã—ãŸã€‚");
                 return pi;
             }
-            // ƒVƒXƒeƒ€‚ÉƒCƒ“ƒp[ƒ\ƒl[ƒg
+            // ã‚·ã‚¹ãƒ†ãƒ ã«ã‚¤ãƒ³ãƒ‘ãƒ¼ã‚½ãƒãƒ¼ãƒˆ
             ImpersonateSystem();
 
             IntPtr hTIProcess = OpenProcess(PROCESS_DUP_HANDLE | PROCESS_QUERY_INFORMATION, false, trustedInstallerPid);
             if (hTIProcess == IntPtr.Zero)
             {
-                Logger.Log(Logger.LogType.ERROR, $"[CreateProcessAsTrustedInstaller] OpenProcess‚ÌÀs‚É¸”s‚µ‚Ü‚µ‚½ (TrustedInstaller.exe)BƒGƒ‰[: {Marshal.GetLastWin32Error()}");
+                Logger.Log(Logger.LogType.ERROR, $"[CreateProcessAsTrustedInstaller] OpenProcessã®å®Ÿè¡Œã«å¤±æ•—ã—ã¾ã—ãŸ (TrustedInstaller.exe)ã€‚ã‚¨ãƒ©ãƒ¼: {Marshal.GetLastWin32Error()}");
                 return pi;
             }
             if (!OpenProcessToken(hTIProcess, MAXIMUM_ALLOWED, out IntPtr hTIToken))
             {
-                Logger.Log(Logger.LogType.ERROR, $"[CreateProcessAsTrustedInstaller] OpenProcessToken‚ÌÀs‚É¸”s‚µ‚Ü‚µ‚½ (TrustedInstaller.exe)BƒGƒ‰[: {Marshal.GetLastWin32Error()}");
+                Logger.Log(Logger.LogType.ERROR, $"[CreateProcessAsTrustedInstaller] OpenProcessTokenã®å®Ÿè¡Œã«å¤±æ•—ã—ã¾ã—ãŸ (TrustedInstaller.exe)ã€‚ã‚¨ãƒ©ãƒ¼: {Marshal.GetLastWin32Error()}");
                 CloseHandle(hTIProcess);
                 return pi;
             }
@@ -405,12 +405,12 @@ namespace Goodbye_F__king_File
             };
             if (!DuplicateTokenEx(hTIToken, MAXIMUM_ALLOWED, ref sa, 2, 2, out IntPtr hDupToken))
             {
-                Logger.Log(Logger.LogType.ERROR, $"[CreateProcessAsTrustedInstaller] DuplicateTokenEx‚ÌÀs‚É¸”s‚µ‚Ü‚µ‚½ (TrustedInstaller.exe)BƒGƒ‰[: {Marshal.GetLastWin32Error()}");
+                Logger.Log(Logger.LogType.ERROR, $"[CreateProcessAsTrustedInstaller] DuplicateTokenExã®å®Ÿè¡Œã«å¤±æ•—ã—ã¾ã—ãŸ (TrustedInstaller.exe)ã€‚ã‚¨ãƒ©ãƒ¼: {Marshal.GetLastWin32Error()}");
                 CloseHandle(hTIToken);
                 CloseHandle(hTIProcess);
                 return pi;
             }
-            // “½–¼ƒpƒCƒvì¬FqƒvƒƒZƒX‚Ö‚Í‘‚«‚İƒnƒ“ƒhƒ‹‚ğŒp³
+            // åŒ¿åãƒ‘ã‚¤ãƒ—ä½œæˆï¼šå­ãƒ—ãƒ­ã‚»ã‚¹ã¸ã¯æ›¸ãè¾¼ã¿ãƒãƒ³ãƒ‰ãƒ«ã‚’ç¶™æ‰¿
             SECURITY_ATTRIBUTES saPipe = new SECURITY_ATTRIBUTES
             {
                 nLength = (uint)Marshal.SizeOf(typeof(SECURITY_ATTRIBUTES)),
@@ -419,16 +419,16 @@ namespace Goodbye_F__king_File
             };
             if (!CreatePipe(out hReadPipe, out IntPtr hWritePipe, ref saPipe, 0))
             {
-                Logger.Log(Logger.LogType.ERROR, $"[CreateProcessAsTrustedInstaller] CreatePipe‚ÌÀs‚É¸”s‚µ‚Ü‚µ‚½BƒGƒ‰[: {Marshal.GetLastWin32Error()}");
+                Logger.Log(Logger.LogType.ERROR, $"[CreateProcessAsTrustedInstaller] CreatePipeã®å®Ÿè¡Œã«å¤±æ•—ã—ã¾ã—ãŸã€‚ã‚¨ãƒ©ãƒ¼: {Marshal.GetLastWin32Error()}");
                 CloseHandle(hDupToken);
                 CloseHandle(hTIToken);
                 CloseHandle(hTIProcess);
                 return pi;
             }
-            // e‘¤‚Ì“Ç‚İæ‚èƒnƒ“ƒhƒ‹‚ÍŒp³‚³‚¹‚È‚¢
+            // è¦ªå´ã®èª­ã¿å–ã‚Šãƒãƒ³ãƒ‰ãƒ«ã¯ç¶™æ‰¿ã•ã›ãªã„
             if (!SetHandleInformation(hReadPipe, HANDLE_FLAG_INHERIT, 0))
             {
-                Logger.Log(Logger.LogType.ERROR, $"[CreateProcessAsTrustedInstaller] SetHandleInformation‚ÌÀs‚É¸”s‚µ‚Ü‚µ‚½BƒGƒ‰[: {Marshal.GetLastWin32Error()}");
+                Logger.Log(Logger.LogType.ERROR, $"[CreateProcessAsTrustedInstaller] SetHandleInformationã®å®Ÿè¡Œã«å¤±æ•—ã—ã¾ã—ãŸã€‚ã‚¨ãƒ©ãƒ¼: {Marshal.GetLastWin32Error()}");
                 CloseHandle(hWritePipe);
                 CloseHandle(hDupToken);
                 CloseHandle(hTIToken);
@@ -438,56 +438,56 @@ namespace Goodbye_F__king_File
             STARTUPINFO si = new STARTUPINFO();
             si.cb = (uint)Marshal.SizeOf(typeof(STARTUPINFO));
             si.lpDesktop = "Winsta0\\Default";
-            // •W€o—Í^ƒGƒ‰[‚ğƒŠƒ_ƒCƒŒƒNƒg
+            // æ¨™æº–å‡ºåŠ›ï¼ã‚¨ãƒ©ãƒ¼ã‚’ãƒªãƒ€ã‚¤ãƒ¬ã‚¯ãƒˆ
             si.dwFlags = STARTF_USESTDHANDLES;
             si.hStdOutput = hWritePipe;
             si.hStdError = hWritePipe;
-            // CREATE_NO_WINDOW‚ğw’è‚µ‚Ä”ñ•\¦‚ÅÀs
+            // CREATE_NO_WINDOWã‚’æŒ‡å®šã—ã¦éè¡¨ç¤ºã§å®Ÿè¡Œ
             uint creationFlags = CREATE_UNICODE_ENVIRONMENT | CREATE_NO_WINDOW;
             if (!CreateProcessWithTokenW(hDupToken, LOGON_WITH_PROFILE, null, commandLine, creationFlags, IntPtr.Zero, null, ref si, out pi))
             {
-                Logger.Log(Logger.LogType.ERROR, $"[CreateProcessAsTrustedInstaller] CreateProcessWithTokenW‚ÌÀs‚É¸”s‚µ‚Ü‚µ‚½BƒGƒ‰[: {Marshal.GetLastWin32Error()}");
+                Logger.Log(Logger.LogType.ERROR, $"[CreateProcessAsTrustedInstaller] CreateProcessWithTokenWã®å®Ÿè¡Œã«å¤±æ•—ã—ã¾ã—ãŸã€‚ã‚¨ãƒ©ãƒ¼: {Marshal.GetLastWin32Error()}");
                 CloseHandle(hWritePipe);
                 CloseHandle(hDupToken);
                 CloseHandle(hTIToken);
                 CloseHandle(hTIProcess);
                 return pi;
             }
-            // qƒvƒƒZƒX‚É‚ÍhWritePipe‚ªŒp³‚³‚ê‚é‚Ì‚ÅAe‘¤‚Í•Â‚¶‚é
+            // å­ãƒ—ãƒ­ã‚»ã‚¹ã«ã¯hWritePipeãŒç¶™æ‰¿ã•ã‚Œã‚‹ã®ã§ã€è¦ªå´ã¯é–‰ã˜ã‚‹
             CloseHandle(hWritePipe);
             CloseHandle(hDupToken);
             CloseHandle(hTIToken);
             CloseHandle(hTIProcess);
-            Logger.Log(Logger.LogType.INFO, "[CreateProcessAsTrustedInstaller] ƒvƒƒZƒX‚Ìì¬‚É¬Œ÷‚µ‚Ü‚µ‚½B");
+            Logger.Log(Logger.LogType.INFO, "[CreateProcessAsTrustedInstaller] ãƒ—ãƒ­ã‚»ã‚¹ã®ä½œæˆã«æˆåŠŸã—ã¾ã—ãŸã€‚");
             return pi;
         }
 
         #endregion
 
-        // TrustedInstaller‚Æ‚µ‚ÄƒvƒƒZƒX‚ğŠJn‚µAo—Í‚ğƒŠƒ_ƒCƒŒƒNƒg‚µ‚ÄƒRƒ“ƒ\[ƒ‹‚Öo—ÍAƒvƒƒZƒXI—¹Œã‚É©g‚àI—¹‚·‚é
-        // commandLine‚Ì‚¤‚¿ƒoƒCƒiƒŠ‚Ü‚Å‚ÌƒpƒX‚Í“ñdˆø—p•„‚ÅˆÍ‚¤‚±‚ÆI
+        // TrustedInstallerã¨ã—ã¦ãƒ—ãƒ­ã‚»ã‚¹ã‚’é–‹å§‹ã—ã€å‡ºåŠ›ã‚’ãƒªãƒ€ã‚¤ãƒ¬ã‚¯ãƒˆã—ã¦ã‚³ãƒ³ã‚½ãƒ¼ãƒ«ã¸å‡ºåŠ›ã€ãƒ—ãƒ­ã‚»ã‚¹çµ‚äº†å¾Œã«è‡ªèº«ã‚‚çµ‚äº†ã™ã‚‹
+        // commandLineã®ã†ã¡ãƒã‚¤ãƒŠãƒªã¾ã§ã®ãƒ‘ã‚¹ã¯äºŒé‡å¼•ç”¨ç¬¦ã§å›²ã†ã“ã¨ï¼
         public static int Run(string commandLine)
         {
             try
             {
-                Logger.Log(Logger.LogType.INFO, "[Main] TrustedInstallerƒT[ƒrƒX‚ğŠJn‚µ‚Ä‚¢‚Ü‚·...");
+                Logger.Log(Logger.LogType.INFO, "[Main] TrustedInstallerã‚µãƒ¼ãƒ“ã‚¹ã‚’é–‹å§‹ã—ã¦ã„ã¾ã™...");
                 uint tiPid = StartTrustedInstallerService();
                 if (tiPid == 0)
                 {
-                    Logger.Log(Logger.LogType.ERROR, "[Main] TrustedInstallerƒT[ƒrƒX‚ÌŠJn‚É¸”s‚µ‚Ü‚µ‚½B");
+                    Logger.Log(Logger.LogType.ERROR, "[Main] TrustedInstallerã‚µãƒ¼ãƒ“ã‚¹ã®é–‹å§‹ã«å¤±æ•—ã—ã¾ã—ãŸã€‚");
                     return 1;
                 }
-                Logger.Log(Logger.LogType.INFO, "[Main] TrustedInstaller‚Æ‚µ‚ÄƒvƒƒZƒX‚ğì¬‚µ‚Ä‚¢‚Ü‚·...");
+                Logger.Log(Logger.LogType.INFO, "[Main] TrustedInstallerã¨ã—ã¦ãƒ—ãƒ­ã‚»ã‚¹ã‚’ä½œæˆã—ã¦ã„ã¾ã™...");
 
-                // ƒvƒƒZƒXì¬‚Æ•W€o—ÍƒŠƒ_ƒCƒŒƒNƒg—pƒpƒCƒv‚Ìæ“¾
+                // ãƒ—ãƒ­ã‚»ã‚¹ä½œæˆã¨æ¨™æº–å‡ºåŠ›ãƒªãƒ€ã‚¤ãƒ¬ã‚¯ãƒˆç”¨ãƒ‘ã‚¤ãƒ—ã®å–å¾—
                 PROCESS_INFORMATION pi = CreateProcessAsTrustedInstaller(tiPid, commandLine, out IntPtr hReadPipe);
                 if (pi.hProcess == IntPtr.Zero)
                 {
-                    Logger.Log(Logger.LogType.ERROR, "[Main] TrustedInstaller‚Æ‚µ‚ÄƒvƒƒZƒX‚Ìì¬‚É¸”s‚µ‚Ü‚µ‚½B");
+                    Logger.Log(Logger.LogType.ERROR, "[Main] TrustedInstallerã¨ã—ã¦ãƒ—ãƒ­ã‚»ã‚¹ã®ä½œæˆã«å¤±æ•—ã—ã¾ã—ãŸã€‚");
                     return 1;
                 }
 
-                // •ÊƒXƒŒƒbƒh‚ÅƒŠƒ_ƒCƒŒƒNƒg‚³‚ê‚½o—Í‚ğ“Ç‚İALoggerŒo—R‚Åo—Í
+                // åˆ¥ã‚¹ãƒ¬ãƒƒãƒ‰ã§ãƒªãƒ€ã‚¤ãƒ¬ã‚¯ãƒˆã•ã‚ŒãŸå‡ºåŠ›ã‚’èª­ã¿ã€LoggerçµŒç”±ã§å‡ºåŠ›
                 Thread outputThread = new Thread(() =>
                 {
                     try
@@ -505,13 +505,13 @@ namespace Goodbye_F__king_File
                     }
                     catch (Exception ex)
                     {
-                        Logger.Log(Logger.LogType.ERROR, $"[OutputThread] ƒŠƒ_ƒCƒŒƒNƒg‚³‚ê‚½o—Í‚Ì“Ç‚İæ‚è’†‚ÉƒGƒ‰[‚ª”­¶‚µ‚Ü‚µ‚½: {ex.Message}");
+                        Logger.Log(Logger.LogType.ERROR, $"[OutputThread] ãƒªãƒ€ã‚¤ãƒ¬ã‚¯ãƒˆã•ã‚ŒãŸå‡ºåŠ›ã®èª­ã¿å–ã‚Šä¸­ã«ã‚¨ãƒ©ãƒ¼ãŒç™ºç”Ÿã—ã¾ã—ãŸ: {ex.Message}");
                     }
                 });
                 outputThread.IsBackground = true;
                 outputThread.Start();
 
-                // qƒvƒƒZƒX‚ÌI—¹‚Ü‚Å‘Ò‹@
+                // å­ãƒ—ãƒ­ã‚»ã‚¹ã®çµ‚äº†ã¾ã§å¾…æ©Ÿ
                 WaitForSingleObject(pi.hProcess, INFINITE);
                 CloseHandle(pi.hProcess);
                 CloseHandle(pi.hThread);
@@ -519,7 +519,7 @@ namespace Goodbye_F__king_File
             }
             catch (Exception ex)
             {
-                Logger.Log(Logger.LogType.ERROR, "[Main] —áŠO: " + ex.Message);
+                Logger.Log(Logger.LogType.ERROR, "[Main] ä¾‹å¤–: " + ex.Message);
             }
             return 0;
         }

@@ -9,7 +9,7 @@ namespace Goodbye_F__king_File
 {
     public static class FileLockHelper
     {
-        // ’è”‚È‚Ç‚Ì’è‹`
+        // å®šæ•°ãªã©ã®å®šç¾©
         private const int SystemHandleInformation = 16;
         private const uint STATUS_INFO_LENGTH_MISMATCH = 0xC0000004;
         private const uint DUPLICATE_CLOSE_SOURCE = 0x00000001;
@@ -52,7 +52,7 @@ namespace Goodbye_F__king_File
         [DllImport("kernel32.dll", SetLastError = true)]
         private static extern bool CloseHandle(IntPtr hObject);
 
-        // ƒVƒXƒeƒ€ƒnƒ“ƒhƒ‹î•ñ‚Ì\‘¢‘ÌiŠeƒnƒ“ƒhƒ‹‚Ìî•ñj
+        // ã‚·ã‚¹ãƒ†ãƒ ãƒãƒ³ãƒ‰ãƒ«æƒ…å ±ã®æ§‹é€ ä½“ï¼ˆå„ãƒãƒ³ãƒ‰ãƒ«ã®æƒ…å ±ï¼‰
         [StructLayout(LayoutKind.Sequential)]
         struct SYSTEM_HANDLE_ENTRY
         {
@@ -83,7 +83,7 @@ namespace Goodbye_F__king_File
             [In, Out] RM_PROCESS_INFO[] rgAffectedApps,
             ref uint lpdwRebootReasons);
 
-        // Restart Manager API ŠÖ˜A‚Ì\‘¢‘ÌE’è”’è‹`
+        // Restart Manager API é–¢é€£ã®æ§‹é€ ä½“ãƒ»å®šæ•°å®šç¾©
         [StructLayout(LayoutKind.Sequential)]
         struct RM_UNIQUE_PROCESS
         {
@@ -119,7 +119,7 @@ namespace Goodbye_F__king_File
         [DllImport("rstrtmgr.dll")]
         static extern int RmEndSession(uint pSessionHandle);
 
-        // w’è‚³‚ê‚½ƒtƒ@ƒCƒ‹‚ğƒƒbƒN‚µ‚Ä‚¢‚éƒvƒƒZƒX‚Ìˆê——‚ğæ“¾
+        // æŒ‡å®šã•ã‚ŒãŸãƒ•ã‚¡ã‚¤ãƒ«ã‚’ãƒ­ãƒƒã‚¯ã—ã¦ã„ã‚‹ãƒ—ãƒ­ã‚»ã‚¹ã®ä¸€è¦§ã‚’å–å¾—
         public static List<Process> GetLockingProcesses(string path)
         {
             uint handle;
@@ -127,30 +127,30 @@ namespace Goodbye_F__king_File
 
             int res = RmStartSession(out handle, 0, sessionKey);
             if (res != 0)
-                throw new Exception("Restart Manager ƒZƒbƒVƒ‡ƒ“‚ÌŠJn‚É¸”s‚µ‚Ü‚µ‚½B");
+                throw new Exception("Restart Manager ã‚»ãƒƒã‚·ãƒ§ãƒ³ã®é–‹å§‹ã«å¤±æ•—ã—ã¾ã—ãŸã€‚");
 
             try
             {
                 string[] resources = new string[] { path };
                 res = RmRegisterResources(handle, (uint)resources.Length, resources, 0, null, 0, null);
                 if (res != 0)
-                    throw new Exception("ƒŠƒ\[ƒX‚Ì“o˜^‚É¸”s‚µ‚Ü‚µ‚½B");
+                    throw new Exception("ãƒªã‚½ãƒ¼ã‚¹ã®ç™»éŒ²ã«å¤±æ•—ã—ã¾ã—ãŸã€‚");
 
                 uint pnProcInfoNeeded = 0;
                 uint pnProcInfo = 0;
                 uint lpdwRebootReasons = 0;
 
-                // •K—v‚ÈƒvƒƒZƒXî•ñ‚ÌƒTƒCƒY‚ğ–â‚¢‡‚í‚¹‚é
+                // å¿…è¦ãªãƒ—ãƒ­ã‚»ã‚¹æƒ…å ±ã®ã‚µã‚¤ã‚ºã‚’å•ã„åˆã‚ã›ã‚‹
                 res = RmGetList(handle, out pnProcInfoNeeded, ref pnProcInfo, null, ref lpdwRebootReasons);
                 if (res != 0 && res != 234) // ERROR_MORE_DATA
-                    throw new Exception("ƒvƒƒZƒXî•ñ‚Ìæ“¾‚É¸”s‚µ‚Ü‚µ‚½B");
+                    throw new Exception("ãƒ—ãƒ­ã‚»ã‚¹æƒ…å ±ã®å–å¾—ã«å¤±æ•—ã—ã¾ã—ãŸã€‚");
 
                 RM_PROCESS_INFO[] processInfo = new RM_PROCESS_INFO[pnProcInfoNeeded];
                 pnProcInfo = pnProcInfoNeeded;
 
                 res = RmGetList(handle, out pnProcInfoNeeded, ref pnProcInfo, processInfo, ref lpdwRebootReasons);
                 if (res != 0)
-                    throw new Exception("ƒvƒƒZƒXî•ñ‚Ìæ“¾‚É¸”s‚µ‚Ü‚µ‚½B");
+                    throw new Exception("ãƒ—ãƒ­ã‚»ã‚¹æƒ…å ±ã®å–å¾—ã«å¤±æ•—ã—ã¾ã—ãŸã€‚");
 
                 var lockingProcesses = new List<Process>();
                 foreach (var procInfo in processInfo)
@@ -162,7 +162,7 @@ namespace Goodbye_F__king_File
                     }
                     catch
                     {
-                        // ƒvƒƒZƒX‚ªŠù‚ÉI—¹‚µ‚Ä‚¢‚éê‡‚ÍƒXƒLƒbƒv
+                        // ãƒ—ãƒ­ã‚»ã‚¹ãŒæ—¢ã«çµ‚äº†ã—ã¦ã„ã‚‹å ´åˆã¯ã‚¹ã‚­ãƒƒãƒ—
                     }
                 }
                 return lockingProcesses;
@@ -174,17 +174,17 @@ namespace Goodbye_F__king_File
         }
 
 
-        // w’è‚µ‚½ƒvƒƒZƒX‚Ì’†‚ÅA‘ÎÛƒtƒ@ƒCƒ‹‚ÉŠÖ˜A‚·‚éƒnƒ“ƒhƒ‹‚ğ‹­§“I‚É•Â‚¶‚é
+        // æŒ‡å®šã—ãŸãƒ—ãƒ­ã‚»ã‚¹ã®ä¸­ã§ã€å¯¾è±¡ãƒ•ã‚¡ã‚¤ãƒ«ã«é–¢é€£ã™ã‚‹ãƒãƒ³ãƒ‰ãƒ«ã‚’å¼·åˆ¶çš„ã«é–‰ã˜ã‚‹
         public static bool ForceCloseFileHandle(Process proc, string filePath)
         {
             bool anyClosed = false;
             IntPtr procHandle = OpenProcess(PROCESS_DUP_HANDLE, false, proc.Id);
             if (procHandle == IntPtr.Zero)
-                throw new Win32Exception(Marshal.GetLastWin32Error(), "ƒvƒƒZƒXƒnƒ“ƒhƒ‹‚Ìæ“¾‚É¸”s‚µ‚Ü‚µ‚½B");
+                throw new Win32Exception(Marshal.GetLastWin32Error(), "ãƒ—ãƒ­ã‚»ã‚¹ãƒãƒ³ãƒ‰ãƒ«ã®å–å¾—ã«å¤±æ•—ã—ã¾ã—ãŸã€‚");
 
             try
             {
-                // ƒVƒXƒeƒ€ƒnƒ“ƒhƒ‹î•ñ‚Ìæ“¾
+                // ã‚·ã‚¹ãƒ†ãƒ ãƒãƒ³ãƒ‰ãƒ«æƒ…å ±ã®å–å¾—
                 uint handleInfoSize = 0x10000;
                 IntPtr handleInfoPtr = Marshal.AllocHGlobal((int)handleInfoSize);
                 try
@@ -199,15 +199,15 @@ namespace Goodbye_F__king_File
                         ntStatus = NtQuerySystemInformation(SystemHandleInformation, handleInfoPtr, handleInfoSize, ref retLength);
                     }
                     if (ntStatus != 0)
-                        throw new Exception("NtQuerySystemInformation ‚É¸”s‚µ‚Ü‚µ‚½BNTSTATUS: 0x" + ntStatus.ToString("X"));
+                        throw new Exception("NtQuerySystemInformation ã«å¤±æ•—ã—ã¾ã—ãŸã€‚NTSTATUS: 0x" + ntStatus.ToString("X"));
 
-                    // æ“ª‚Ì Int32 ‚Íƒnƒ“ƒhƒ‹‚Ì”‚ğ¦‚·
+                    // å…ˆé ­ã® Int32 ã¯ãƒãƒ³ãƒ‰ãƒ«ã®æ•°ã‚’ç¤ºã™
                     int handleCount = Marshal.ReadInt32(handleInfoPtr);
                     IntPtr handleEntryPtr = IntPtr.Add(handleInfoPtr, sizeof(int));
 
                     int sizeOfEntry = Marshal.SizeOf(typeof(SYSTEM_HANDLE_ENTRY));
 
-                    // ‘ÎÛƒvƒƒZƒX‚Ìƒnƒ“ƒhƒ‹‚ğ‘–¸
+                    // å¯¾è±¡ãƒ—ãƒ­ã‚»ã‚¹ã®ãƒãƒ³ãƒ‰ãƒ«ã‚’èµ°æŸ»
                     for (int i = 0; i < handleCount; i++)
                     {
                         SYSTEM_HANDLE_ENTRY entry = Marshal.PtrToStructure<SYSTEM_HANDLE_ENTRY>(handleEntryPtr);
@@ -217,26 +217,26 @@ namespace Goodbye_F__king_File
                             continue;
                         }
 
-                        // DuplicateHandle ‚ğ—p‚¢‚Ä‘ÎÛƒnƒ“ƒhƒ‹‚ğ©ƒvƒƒZƒX‚Ö•¡»i“Ç‚İæ‚èê—pj
+                        // DuplicateHandle ã‚’ç”¨ã„ã¦å¯¾è±¡ãƒãƒ³ãƒ‰ãƒ«ã‚’è‡ªãƒ—ãƒ­ã‚»ã‚¹ã¸è¤‡è£½ï¼ˆèª­ã¿å–ã‚Šå°‚ç”¨ï¼‰
                         if (DuplicateHandle(procHandle, entry.HandleValue, Process.GetCurrentProcess().Handle, out IntPtr dupHandle, 0, false, 0))
                         {
                             try
                             {
-                                // ƒnƒ“ƒhƒ‹‚©‚çƒIƒuƒWƒFƒNƒg–¼‚ğæ“¾
+                                // ãƒãƒ³ãƒ‰ãƒ«ã‹ã‚‰ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆåã‚’å–å¾—
                                 string objectName = GetObjectName(dupHandle);
                                 if (!string.IsNullOrEmpty(objectName) && objectName.IndexOf(filePath, StringComparison.OrdinalIgnoreCase) >= 0)
                                 {
-                                    // ˆê’v‚µ‚½ê‡ADUPLICATE_CLOSE_SOURCE w’è‚Åƒnƒ“ƒhƒ‹‚ğ•¡»‚µAŒ³‘¤‚ğ•Â‚¶‚é
+                                    // ä¸€è‡´ã—ãŸå ´åˆã€DUPLICATE_CLOSE_SOURCE æŒ‡å®šã§ãƒãƒ³ãƒ‰ãƒ«ã‚’è¤‡è£½ã—ã€å…ƒå´ã‚’é–‰ã˜ã‚‹
                                     IntPtr dummy;
                                     bool dupClose = DuplicateHandle(procHandle, entry.HandleValue, Process.GetCurrentProcess().Handle, out dummy, 0, false, DUPLICATE_CLOSE_SOURCE);
                                     if (dupClose)
                                     {
                                         anyClosed = true;
-                                        Logger.Log(Logger.LogType.INFO, $"ƒvƒƒZƒX {proc.Id} ‚Ìƒnƒ“ƒhƒ‹ 0x{entry.HandleValue:X} ‚ğ•Â‚¶‚Ü‚µ‚½Bi‘ÎÛ: {objectName}j");
+                                        Logger.Log(Logger.LogType.INFO, $"ãƒ—ãƒ­ã‚»ã‚¹ {proc.Id} ã®ãƒãƒ³ãƒ‰ãƒ« 0x{entry.HandleValue:X} ã‚’é–‰ã˜ã¾ã—ãŸã€‚ï¼ˆå¯¾è±¡: {objectName}ï¼‰");
                                     }
                                     else
                                     {
-                                        Logger.Log(Logger.LogType.ERROR, $"ƒvƒƒZƒX {proc.Id} ‚Ìƒnƒ“ƒhƒ‹ 0x{entry.HandleValue:X} ‚ÌƒNƒ[ƒY‚É¸”s‚µ‚Ü‚µ‚½: {Marshal.GetLastWin32Error()}");
+                                        Logger.Log(Logger.LogType.ERROR, $"ãƒ—ãƒ­ã‚»ã‚¹ {proc.Id} ã®ãƒãƒ³ãƒ‰ãƒ« 0x{entry.HandleValue:X} ã®ã‚¯ãƒ­ãƒ¼ã‚ºã«å¤±æ•—ã—ã¾ã—ãŸ: {Marshal.GetLastWin32Error()}");
                                     }
                                 }
                             }
@@ -260,11 +260,11 @@ namespace Goodbye_F__king_File
             return anyClosed;
         }
 
-        // NtQueryObject ‚ğg—p‚µ‚ÄAƒnƒ“ƒhƒ‹‚©‚çƒIƒuƒWƒFƒNƒg–¼‚ğæ“¾
+        // NtQueryObject ã‚’ä½¿ç”¨ã—ã¦ã€ãƒãƒ³ãƒ‰ãƒ«ã‹ã‚‰ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆåã‚’å–å¾—
         private static string GetObjectName(IntPtr handle)
         {
             uint length = 0;
-            // •K—v‚ÈƒTƒCƒY‚ğ–â‚¢‡‚í‚¹‚é
+            // å¿…è¦ãªã‚µã‚¤ã‚ºã‚’å•ã„åˆã‚ã›ã‚‹
             uint status = NtQueryObject(handle, ObjectNameInformation, IntPtr.Zero, 0, ref length);
             if (length == 0)
                 return null;
@@ -276,11 +276,11 @@ namespace Goodbye_F__king_File
                 if (status != 0)
                     return null;
 
-                // OBJECT_NAME_INFORMATION ‚Íæ“ª‚É UNICODE_STRING ‚ğ‚Â
+                // OBJECT_NAME_INFORMATION ã¯å…ˆé ­ã« UNICODE_STRING ã‚’æŒã¤
                 UNICODE_STRING unicodeStr = Marshal.PtrToStructure<UNICODE_STRING>(nameInfoPtr);
                 if (unicodeStr.Length <= 0)
                     return null;
-                // UNICODE_STRING ‚Ì Buffer ‚©‚ç•¶š—ñ‚ğæ“¾
+                // UNICODE_STRING ã® Buffer ã‹ã‚‰æ–‡å­—åˆ—ã‚’å–å¾—
                 return Marshal.PtrToStringUni(unicodeStr.Buffer, unicodeStr.Length / 2);
             }
             finally
@@ -289,7 +289,7 @@ namespace Goodbye_F__king_File
             }
         }
 
-        // UNICODE_STRING ‚Ì\‘¢‘Ì’è‹`
+        // UNICODE_STRING ã®æ§‹é€ ä½“å®šç¾©
         [StructLayout(LayoutKind.Sequential)]
         struct UNICODE_STRING
         {

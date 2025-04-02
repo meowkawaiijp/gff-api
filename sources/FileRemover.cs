@@ -17,56 +17,56 @@ namespace Goodbye_F__king_File
             _FilePath = fp;
         }
 
-        // w’è‚³‚ê‚½ƒpƒX‚ª—LŒø‚Èƒtƒ@ƒCƒ‹‚©‚Ç‚¤‚©‚ğŒŸØ
+        // æŒ‡å®šã•ã‚ŒãŸãƒ‘ã‚¹ãŒæœ‰åŠ¹ãªãƒ•ã‚¡ã‚¤ãƒ«ã‹ã©ã†ã‹ã‚’æ¤œè¨¼
         public bool VerifyIfItsValid()
         {
             if (string.IsNullOrWhiteSpace(_FilePath))
             {
-                VerifyError = "ƒtƒ@ƒCƒ‹ƒpƒX‚ªw’è‚³‚ê‚Ä‚¢‚Ü‚¹‚ñB";
+                VerifyError = "ãƒ•ã‚¡ã‚¤ãƒ«ãƒ‘ã‚¹ãŒæŒ‡å®šã•ã‚Œã¦ã„ã¾ã›ã‚“ã€‚";
                 return false;
             }
             if (Directory.Exists(_FilePath))
             {
-                VerifyError = "ƒfƒBƒŒƒNƒgƒŠ‚ªw’è‚³‚ê‚Ä‚¢‚Ü‚·Bƒtƒ@ƒCƒ‹‚ğw’è‚µ‚Ä‚­‚¾‚³‚¢B";
+                VerifyError = "ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªãŒæŒ‡å®šã•ã‚Œã¦ã„ã¾ã™ã€‚ãƒ•ã‚¡ã‚¤ãƒ«ã‚’æŒ‡å®šã—ã¦ãã ã•ã„ã€‚";
                 return false;
             }
             if (!File.Exists(_FilePath) && !File.Exists(@"\\?\" + _FilePath))
             {
-                VerifyError = "w’è‚³‚ê‚½ƒtƒ@ƒCƒ‹‚ª‘¶İ‚µ‚Ü‚¹‚ñB";
+                VerifyError = "æŒ‡å®šã•ã‚ŒãŸãƒ•ã‚¡ã‚¤ãƒ«ãŒå­˜åœ¨ã—ã¾ã›ã‚“ã€‚";
                 return false;
             }
             return true;
         }
 
-        // ‹­§“I‚Éƒtƒ@ƒCƒ‹íœ‚ğÀs
+        // å¼·åˆ¶çš„ã«ãƒ•ã‚¡ã‚¤ãƒ«å‰Šé™¤ã‚’å®Ÿè¡Œ
         public void ForceRMFile()
         {
-            Logger.Log(Logger.LogType.DEBUG, "==== ƒtƒ@ƒCƒ‹íœˆ—‚ğŠJn‚µ‚Ü‚· ====");
+            Logger.Log(Logger.LogType.DEBUG, "==== ãƒ•ã‚¡ã‚¤ãƒ«å‰Šé™¤å‡¦ç†ã‚’é–‹å§‹ã—ã¾ã™ ====");
             Logger.Log(Logger.LogType.DEBUG, "FilePath: " + _FilePath);
 
-            // ƒtƒ@ƒCƒ‹‘®«‚ÌŠm”F‚ÆA“Ç‚İæ‚èê—p‘®«‚Å‚ ‚ê‚Î‰ğœ
+            // ãƒ•ã‚¡ã‚¤ãƒ«å±æ€§ã®ç¢ºèªã¨ã€èª­ã¿å–ã‚Šå°‚ç”¨å±æ€§ã§ã‚ã‚Œã°è§£é™¤
             try
             {
                 FileInfo file = new FileInfo(_FilePath);
-                Logger.Log(Logger.LogType.DEBUG, "Œ»İ‚Ìƒtƒ@ƒCƒ‹‘®«: " + file.Attributes);
+                Logger.Log(Logger.LogType.DEBUG, "ç¾åœ¨ã®ãƒ•ã‚¡ã‚¤ãƒ«å±æ€§: " + file.Attributes);
                 if ((file.Attributes & FileAttributes.ReadOnly) == FileAttributes.ReadOnly)
                 {
-                    Logger.Log(Logger.LogType.WARN, "ƒtƒ@ƒCƒ‹‚ª“Ç‚İæ‚èê—p‘®«‚Ì‚½‚ßA’Êí‘®«‚É•ÏX‚µ‚Ü‚·B");
+                    Logger.Log(Logger.LogType.WARN, "ãƒ•ã‚¡ã‚¤ãƒ«ãŒèª­ã¿å–ã‚Šå°‚ç”¨å±æ€§ã®ãŸã‚ã€é€šå¸¸å±æ€§ã«å¤‰æ›´ã—ã¾ã™ã€‚");
                     file.Attributes = FileAttributes.Normal;
-                    Logger.Log(Logger.LogType.DEBUG, "‘®«•ÏXŒã‚Ìƒtƒ@ƒCƒ‹‘®«: " + file.Attributes);
+                    Logger.Log(Logger.LogType.DEBUG, "å±æ€§å¤‰æ›´å¾Œã®ãƒ•ã‚¡ã‚¤ãƒ«å±æ€§: " + file.Attributes);
                 }
                 else
                 {
-                    Logger.Log(Logger.LogType.DEBUG, "ƒtƒ@ƒCƒ‹‚Í“Ç‚İæ‚èê—p‚Å‚Í‚ ‚è‚Ü‚¹‚ñB");
+                    Logger.Log(Logger.LogType.DEBUG, "ãƒ•ã‚¡ã‚¤ãƒ«ã¯èª­ã¿å–ã‚Šå°‚ç”¨ã§ã¯ã‚ã‚Šã¾ã›ã‚“ã€‚");
                 }
             }
             catch (Exception ex)
             {
-                Logger.Log(Logger.LogType.ERROR, "ƒtƒ@ƒCƒ‹‘®«‚ÌŠm”F’†‚ÉƒGƒ‰[‚ª”­¶‚µ‚Ü‚µ‚½: " + ex.Message);
+                Logger.Log(Logger.LogType.ERROR, "ãƒ•ã‚¡ã‚¤ãƒ«å±æ€§ã®ç¢ºèªä¸­ã«ã‚¨ãƒ©ãƒ¼ãŒç™ºç”Ÿã—ã¾ã—ãŸ: " + ex.Message);
             }
 
-            // QuickUnlink ‚É‚æ‚é‰‰ñíœs
-            Logger.Log(Logger.LogType.DEBUG, "QuickUnlink ‚É‚æ‚éíœs‚ğŠJn‚µ‚Ü‚·...");
+            // QuickUnlink ã«ã‚ˆã‚‹åˆå›å‰Šé™¤è©¦è¡Œ
+            Logger.Log(Logger.LogType.DEBUG, "QuickUnlink ã«ã‚ˆã‚‹å‰Šé™¤è©¦è¡Œã‚’é–‹å§‹ã—ã¾ã™...");
             Logger.LogNotNewLine(Logger.LogType.INFO, "QuickUnlink " + _FilePath + " ");
             int resultQuickUnlink = QuickUnlink();
 
@@ -76,31 +76,31 @@ namespace Goodbye_F__king_File
                     Logger.LogNotNewLine_Next("-> [DONE]");
                     return;
                 case 1:
-                    Logger.LogNotNewLine_Next("-> [ArgumentException] ƒpƒX‚ª‹ó•¶šA‚Ü‚½‚Í‹ó”’‚Ì‚İA‚Ü‚½‚Í–³Œø‚È•¶š‚ğŠÜ‚ñ‚Å‚¢‚Ü‚·B");
+                    Logger.LogNotNewLine_Next("-> [ArgumentException] ãƒ‘ã‚¹ãŒç©ºæ–‡å­—ã€ã¾ãŸã¯ç©ºç™½ã®ã¿ã€ã¾ãŸã¯ç„¡åŠ¹ãªæ–‡å­—ã‚’å«ã‚“ã§ã„ã¾ã™ã€‚");
                     break;
                 case 2:
-                    Logger.LogNotNewLine_Next("-> [DirectoryNotFoundException] w’è‚³‚ê‚½ƒpƒX‚Í–³Œø‚Å‚·B");
+                    Logger.LogNotNewLine_Next("-> [DirectoryNotFoundException] æŒ‡å®šã•ã‚ŒãŸãƒ‘ã‚¹ã¯ç„¡åŠ¹ã§ã™ã€‚");
                     return;
                 case 3:
-                    Logger.LogNotNewLine_Next("-> [PathTooLongException] ƒpƒXAƒtƒ@ƒCƒ‹–¼A‚Ü‚½‚Í‚»‚Ì—¼•û‚ªƒVƒXƒeƒ€’è‹`‚ÌÅ‘å’·‚ğ’´‚¦‚Ä‚¢‚Ü‚·B");
+                    Logger.LogNotNewLine_Next("-> [PathTooLongException] ãƒ‘ã‚¹ã€ãƒ•ã‚¡ã‚¤ãƒ«åã€ã¾ãŸã¯ãã®ä¸¡æ–¹ãŒã‚·ã‚¹ãƒ†ãƒ å®šç¾©ã®æœ€å¤§é•·ã‚’è¶…ãˆã¦ã„ã¾ã™ã€‚");
                     break;
                 case 4:
-                    Logger.LogNotNewLine_Next("-> [IOException] w’è‚³‚ê‚½ƒtƒ@ƒCƒ‹‚Íg—p’†‚Å‚·B");
+                    Logger.LogNotNewLine_Next("-> [IOException] æŒ‡å®šã•ã‚ŒãŸãƒ•ã‚¡ã‚¤ãƒ«ã¯ä½¿ç”¨ä¸­ã§ã™ã€‚");
                     break;
                 case 5:
-                    Logger.LogNotNewLine_Next("-> [NotSupportedException] ƒpƒX‚ÌŒ`®‚ª–³Œø‚Å‚·B");
+                    Logger.LogNotNewLine_Next("-> [NotSupportedException] ãƒ‘ã‚¹ã®å½¢å¼ãŒç„¡åŠ¹ã§ã™ã€‚");
                     break;
                 case 6:
-                    Logger.LogNotNewLine_Next("-> [UnauthorizedAccessException] •K—v‚ÈŒ ŒÀ‚ª‚ ‚è‚Ü‚¹‚ñB‚Ü‚½‚ÍAÀs’†‚ÌÀs‰Â”\ƒtƒ@ƒCƒ‹AƒfƒBƒŒƒNƒgƒŠA“Ç‚İæ‚èê—pƒtƒ@ƒCƒ‹‚ªw’è‚³‚ê‚Ä‚¢‚Ü‚·B");
+                    Logger.LogNotNewLine_Next("-> [UnauthorizedAccessException] å¿…è¦ãªæ¨©é™ãŒã‚ã‚Šã¾ã›ã‚“ã€‚ã¾ãŸã¯ã€å®Ÿè¡Œä¸­ã®å®Ÿè¡Œå¯èƒ½ãƒ•ã‚¡ã‚¤ãƒ«ã€ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã€èª­ã¿å–ã‚Šå°‚ç”¨ãƒ•ã‚¡ã‚¤ãƒ«ãŒæŒ‡å®šã•ã‚Œã¦ã„ã¾ã™ã€‚");
                     break;
                 default:
-                    Logger.LogNotNewLine_Next("-> [Exception] •s–¾‚ÈƒGƒ‰[‚ª”­¶‚µ‚Ü‚µ‚½B");
-                    Logger.Log(Logger.LogType.ERROR, "•s–¾‚ÈƒGƒ‰[‚Ì‚½‚ßƒtƒ@ƒCƒ‹‚ğíœ‚Å‚«‚Ü‚¹‚ñB");
+                    Logger.LogNotNewLine_Next("-> [Exception] ä¸æ˜ãªã‚¨ãƒ©ãƒ¼ãŒç™ºç”Ÿã—ã¾ã—ãŸã€‚");
+                    Logger.Log(Logger.LogType.ERROR, "ä¸æ˜ãªã‚¨ãƒ©ãƒ¼ã®ãŸã‚ãƒ•ã‚¡ã‚¤ãƒ«ã‚’å‰Šé™¤ã§ãã¾ã›ã‚“ã€‚");
                     return;
             }
 
-            // Às’†‚ÌƒvƒƒZƒX‚Ìê‡A‹­§I—¹‚ğ‚İ‚é
-            Logger.Log(Logger.LogType.INFO, "ƒtƒ@ƒCƒ‹‚ğg—p’†‚ÌƒvƒƒZƒX‚ğŒŸõ‚µ‚Ä‚¢‚Ü‚·...");
+            // å®Ÿè¡Œä¸­ã®ãƒ—ãƒ­ã‚»ã‚¹ã®å ´åˆã€å¼·åˆ¶çµ‚äº†ã‚’è©¦ã¿ã‚‹
+            Logger.Log(Logger.LogType.INFO, "ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ä½¿ç”¨ä¸­ã®ãƒ—ãƒ­ã‚»ã‚¹ã‚’æ¤œç´¢ã—ã¦ã„ã¾ã™...");
             foreach (Process proc in Process.GetProcesses())
             {
                 try
@@ -109,18 +109,18 @@ namespace Goodbye_F__king_File
                     {
                         if (proc.Id == Process.GetCurrentProcess().Id)
                         {
-                            Logger.Log(Logger.LogType.WARN, $"‚±‚ÌƒAƒvƒŠ©g‚ªƒtƒ@ƒCƒ‹‚ğg—p’†‚Å‚·BƒXƒLƒbƒv‚µ‚Ü‚·B");
+                            Logger.Log(Logger.LogType.WARN, $"ã“ã®ã‚¢ãƒ—ãƒªè‡ªèº«ãŒãƒ•ã‚¡ã‚¤ãƒ«ã‚’ä½¿ç”¨ä¸­ã§ã™ã€‚ã‚¹ã‚­ãƒƒãƒ—ã—ã¾ã™ã€‚");
                             continue;
                         }
-                        Logger.Log(Logger.LogType.WARN, $"Às’†‚ÌƒvƒƒZƒX {proc.Id} ({proc.ProcessName}) ‚ªƒtƒ@ƒCƒ‹‚ğg—p’†‚Å‚·B‹­§I—¹‚ğ‚İ‚Ü‚·...");
+                        Logger.Log(Logger.LogType.WARN, $"å®Ÿè¡Œä¸­ã®ãƒ—ãƒ­ã‚»ã‚¹ {proc.Id} ({proc.ProcessName}) ãŒãƒ•ã‚¡ã‚¤ãƒ«ã‚’ä½¿ç”¨ä¸­ã§ã™ã€‚å¼·åˆ¶çµ‚äº†ã‚’è©¦ã¿ã¾ã™...");
                         try
                         {
                             proc.Kill();
-                            Logger.Log(Logger.LogType.INFO, $"ƒvƒƒZƒX {proc.Id} ‚ğ³í‚ÉI—¹‚µ‚Ü‚µ‚½B");
+                            Logger.Log(Logger.LogType.INFO, $"ãƒ—ãƒ­ã‚»ã‚¹ {proc.Id} ã‚’æ­£å¸¸ã«çµ‚äº†ã—ã¾ã—ãŸã€‚");
                         }
                         catch
                         {
-                            Logger.Log(Logger.LogType.WARN, $"ƒvƒƒZƒX {proc.Id} ‚ÌI—¹‚É¸”s‚µ‚½‚½‚ßAProcessKiller ‚ğ—˜—p‚µ‚Ä‹­§I—¹‚ğ‚İ‚Ü‚·...");
+                            Logger.Log(Logger.LogType.WARN, $"ãƒ—ãƒ­ã‚»ã‚¹ {proc.Id} ã®çµ‚äº†ã«å¤±æ•—ã—ãŸãŸã‚ã€ProcessKiller ã‚’åˆ©ç”¨ã—ã¦å¼·åˆ¶çµ‚äº†ã‚’è©¦ã¿ã¾ã™...");
                             ProcessKiller.ForceKillProcess(proc);
                         }
                         try
@@ -133,59 +133,59 @@ namespace Goodbye_F__king_File
                 catch { }
             }
 
-            // ƒtƒ@ƒCƒ‹‚ğƒƒbƒN‚µ‚Ä‚¢‚éƒvƒƒZƒX‚ğŒŸõ
-            Logger.Log(Logger.LogType.INFO, "ƒtƒ@ƒCƒ‹‚ğƒƒbƒN‚µ‚Ä‚¢‚éƒvƒƒZƒX‚ğæ“¾‚µ‚Ä‚¢‚Ü‚·...");
+            // ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ãƒ­ãƒƒã‚¯ã—ã¦ã„ã‚‹ãƒ—ãƒ­ã‚»ã‚¹ã‚’æ¤œç´¢
+            Logger.Log(Logger.LogType.INFO, "ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ãƒ­ãƒƒã‚¯ã—ã¦ã„ã‚‹ãƒ—ãƒ­ã‚»ã‚¹ã‚’å–å¾—ã—ã¦ã„ã¾ã™...");
             try
             {
                 List<Process> lockingProcesses = FileLockHelper.GetLockingProcesses(_FilePath);
 
                 foreach (var proc in lockingProcesses)
                 {
-                    Logger.Log(Logger.LogType.WARN, $"ƒvƒƒZƒX {proc.Id} ({proc.ProcessName}) ‚ªƒtƒ@ƒCƒ‹‚ğƒƒbƒN‚µ‚Ä‚¢‚Ü‚·B");
+                    Logger.Log(Logger.LogType.WARN, $"ãƒ—ãƒ­ã‚»ã‚¹ {proc.Id} ({proc.ProcessName}) ãŒãƒ•ã‚¡ã‚¤ãƒ«ã‚’ãƒ­ãƒƒã‚¯ã—ã¦ã„ã¾ã™ã€‚");
 
                     if (proc.Id == Process.GetCurrentProcess().Id)
                     {
-                        Logger.Log(Logger.LogType.WARN, $"‚±‚ÌƒAƒvƒŠ©g‚ªƒtƒ@ƒCƒ‹‚ğƒƒbƒN‚µ‚Ä‚¢‚é‚½‚ßAƒXƒLƒbƒv‚µ‚Ü‚·B");
+                        Logger.Log(Logger.LogType.WARN, $"ã“ã®ã‚¢ãƒ—ãƒªè‡ªèº«ãŒãƒ•ã‚¡ã‚¤ãƒ«ã‚’ãƒ­ãƒƒã‚¯ã—ã¦ã„ã‚‹ãŸã‚ã€ã‚¹ã‚­ãƒƒãƒ—ã—ã¾ã™ã€‚");
                         continue;
                     }
 
-                    // ‚Ü‚¸‚Íƒnƒ“ƒhƒ‹‰ğ•ú‚ğ‚İ‚é
+                    // ã¾ãšã¯ãƒãƒ³ãƒ‰ãƒ«è§£æ”¾ã‚’è©¦ã¿ã‚‹
                     bool handleClosed = FileLockHelper.ForceCloseFileHandle(proc, _FilePath);
                     if (!handleClosed)
                     {
-                        Logger.Log(Logger.LogType.ERROR, $"ƒnƒ“ƒhƒ‹‚Ì‰ğ•ú‚É¸”s‚µ‚Ü‚µ‚½BƒvƒƒZƒX {proc.Id} ‚ğ‹­§I—¹‚µ‚Ü‚·B");
+                        Logger.Log(Logger.LogType.ERROR, $"ãƒãƒ³ãƒ‰ãƒ«ã®è§£æ”¾ã«å¤±æ•—ã—ã¾ã—ãŸã€‚ãƒ—ãƒ­ã‚»ã‚¹ {proc.Id} ã‚’å¼·åˆ¶çµ‚äº†ã—ã¾ã™ã€‚");
                         ProcessKiller.ForceKillProcess(proc);
                     }
                     else
                     {
-                        Logger.Log(Logger.LogType.INFO, $"ƒvƒƒZƒX {proc.Id} ‚Ìƒnƒ“ƒhƒ‹‚ğ‹­§“I‚É‰ğ•ú‚µ‚Ü‚µ‚½B");
+                        Logger.Log(Logger.LogType.INFO, $"ãƒ—ãƒ­ã‚»ã‚¹ {proc.Id} ã®ãƒãƒ³ãƒ‰ãƒ«ã‚’å¼·åˆ¶çš„ã«è§£æ”¾ã—ã¾ã—ãŸã€‚");
                     }
                 }
             }
             catch (Exception e)
             {
-                Logger.Log(Logger.LogType.ERROR, "ƒtƒ@ƒCƒ‹ƒƒbƒN‚Ìæ“¾‚É¸”s‚µ‚Ü‚µ‚½BƒGƒ‰[: " + e.Message);
+                Logger.Log(Logger.LogType.ERROR, "ãƒ•ã‚¡ã‚¤ãƒ«ãƒ­ãƒƒã‚¯ã®å–å¾—ã«å¤±æ•—ã—ã¾ã—ãŸã€‚ã‚¨ãƒ©ãƒ¼: " + e.Message);
             }
 
-            // Š—LÒ/ƒAƒNƒZƒXŒ ŒÀ•ÏX
-            // TrustedInstaller ‚Ìê‡ASeTcbPrivilege ‚ª‚ ‚è‘S‚ÄƒoƒCƒpƒX‚Å‚«‚é‚½‚ß•s—v‚¾‚ª”O‚Ì‚½‚ßÀ‘•
+            // æ‰€æœ‰è€…/ã‚¢ã‚¯ã‚»ã‚¹æ¨©é™å¤‰æ›´
+            // TrustedInstaller ã®å ´åˆã€SeTcbPrivilege ãŒã‚ã‚Šå…¨ã¦ãƒã‚¤ãƒ‘ã‚¹ã§ãã‚‹ãŸã‚ä¸è¦ã ãŒå¿µã®ãŸã‚å®Ÿè£…
             try
             {
                 FileInfo di = new FileInfo(_FilePath);
                 FileSecurity ds = di.GetAccessControl();
 
-                // TrustedInstaller ‚Ì NTAccount ‚ğæ“¾
+                // TrustedInstaller ã® NTAccount ã‚’å–å¾—
                 var trustedInstaller = new NTAccount("NT SERVICE", "TrustedInstaller");
 
-                // TrustedInstaller ‚ÌíœŒ ŒÀ‚ªŠù‚É‚ ‚é‚©Šm”F‚·‚é
+                // TrustedInstaller ã®å‰Šé™¤æ¨©é™ãŒæ—¢ã«ã‚ã‚‹ã‹ç¢ºèªã™ã‚‹
                 bool hasDeletePermission = false;
                 AuthorizationRuleCollection rules = ds.GetAccessRules(true, true, typeof(NTAccount));
                 foreach (FileSystemAccessRule rule in rules)
                 {
-                    // ƒ‹[ƒ‹‚Ì‘ÎÛ‚ªTrustedInstaller‚©Šm”F
+                    // ãƒ«ãƒ¼ãƒ«ã®å¯¾è±¡ãŒTrustedInstallerã‹ç¢ºèª
                     if (rule.IdentityReference.Value.Equals(trustedInstaller.Value, StringComparison.OrdinalIgnoreCase))
                     {
-                        // íœŒ ŒÀ‚ª‹–‰Â‚³‚ê‚Ä‚¢‚é‚©ƒ`ƒFƒbƒN
+                        // å‰Šé™¤æ¨©é™ãŒè¨±å¯ã•ã‚Œã¦ã„ã‚‹ã‹ãƒã‚§ãƒƒã‚¯
                         if ((rule.FileSystemRights & FileSystemRights.Delete) == FileSystemRights.Delete &&
                             rule.AccessControlType == AccessControlType.Allow)
                         {
@@ -195,13 +195,13 @@ namespace Goodbye_F__king_File
                     }
                 }
 
-                // TrustedInstaller‚ÉíœŒ ŒÀ‚ª‚È‚©‚Á‚½ê‡‚Ì‚İAŠ—LÒ‚Ì•ÏX‚Æƒtƒ‹ƒRƒ“ƒgƒ[ƒ‹‚Ì•t—^‚ğs‚¤
+                // TrustedInstallerã«å‰Šé™¤æ¨©é™ãŒãªã‹ã£ãŸå ´åˆã®ã¿ã€æ‰€æœ‰è€…ã®å¤‰æ›´ã¨ãƒ•ãƒ«ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã®ä»˜ä¸ã‚’è¡Œã†
                 if (!hasDeletePermission)
                 {
-                    // Š—LÒ‚Ìİ’è
+                    // æ‰€æœ‰è€…ã®è¨­å®š
                     ds.SetOwner(trustedInstaller);
 
-                    // TrustedInstaller ‚Éƒtƒ‹ƒRƒ“ƒgƒ[ƒ‹‚ğ•t—^
+                    // TrustedInstaller ã«ãƒ•ãƒ«ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã‚’ä»˜ä¸
                     var accessRule = new FileSystemAccessRule(
                         trustedInstaller,
                         FileSystemRights.FullControl,
@@ -211,29 +211,29 @@ namespace Goodbye_F__king_File
                     ds.AddAccessRule(accessRule);
 
                     di.SetAccessControl(ds);
-                    Logger.Log(Logger.LogType.INFO, "ƒtƒ@ƒCƒ‹‚ÌŠ—LÒ‚¨‚æ‚ÑŒ ŒÀ‚ğ TrustedInstaller ‚ÉC³‚µ‚Ü‚µ‚½B");
+                    Logger.Log(Logger.LogType.INFO, "ãƒ•ã‚¡ã‚¤ãƒ«ã®æ‰€æœ‰è€…ãŠã‚ˆã³æ¨©é™ã‚’ TrustedInstaller ã«ä¿®æ­£ã—ã¾ã—ãŸã€‚");
                 }
                 else
                 {
-                    Logger.Log(Logger.LogType.INFO, "TrustedInstaller ‚ÍŠù‚ÉíœŒ ŒÀ‚ğ—L‚µ‚Ä‚¢‚Ü‚·B");
+                    Logger.Log(Logger.LogType.INFO, "TrustedInstaller ã¯æ—¢ã«å‰Šé™¤æ¨©é™ã‚’æœ‰ã—ã¦ã„ã¾ã™ã€‚");
                 }
             }
             catch (Exception e)
             {
-                Logger.Log(Logger.LogType.ERROR, $"ƒtƒ@ƒCƒ‹‚ÌŒ ŒÀC³‚É¸”s‚µ‚Ü‚µ‚½BƒGƒ‰[: {e.Message}");
+                Logger.Log(Logger.LogType.ERROR, $"ãƒ•ã‚¡ã‚¤ãƒ«ã®æ¨©é™ä¿®æ­£ã«å¤±æ•—ã—ã¾ã—ãŸã€‚ã‚¨ãƒ©ãƒ¼: {e.Message}");
             }
 
 
-            // DOS Device Path ‚ğ—˜—p‚µ‚Äƒtƒ@ƒCƒ‹íœ‚ğÄs
-            Logger.Log(Logger.LogType.INFO, "DOS Device Path ‚ğ—˜—p‚µ‚ÄÅI“I‚Èƒtƒ@ƒCƒ‹íœ‚ğs‚µ‚Ü‚·...");
+            // DOS Device Path ã‚’åˆ©ç”¨ã—ã¦ãƒ•ã‚¡ã‚¤ãƒ«å‰Šé™¤ã‚’å†è©¦è¡Œ
+            Logger.Log(Logger.LogType.INFO, "DOS Device Path ã‚’åˆ©ç”¨ã—ã¦æœ€çµ‚çš„ãªãƒ•ã‚¡ã‚¤ãƒ«å‰Šé™¤ã‚’è©¦è¡Œã—ã¾ã™...");
             try
             {
                 File.Delete(@"\\?\" + _FilePath);
-                Logger.Log(Logger.LogType.INFO, "ÅI“I‚Éƒtƒ@ƒCƒ‹‚Ìíœ‚É¬Œ÷‚µ‚Ü‚µ‚½B");
+                Logger.Log(Logger.LogType.INFO, "æœ€çµ‚çš„ã«ãƒ•ã‚¡ã‚¤ãƒ«ã®å‰Šé™¤ã«æˆåŠŸã—ã¾ã—ãŸã€‚");
             }
             catch (Exception ex)
             {
-                Logger.Log(Logger.LogType.ERROR, "ÅI“I‚Èíœ‚É¸”s‚µ‚Ü‚µ‚½BƒGƒ‰[: " + ex.Message);
+                Logger.Log(Logger.LogType.ERROR, "æœ€çµ‚çš„ãªå‰Šé™¤ã«å¤±æ•—ã—ã¾ã—ãŸã€‚ã‚¨ãƒ©ãƒ¼: " + ex.Message);
             }
         }
 

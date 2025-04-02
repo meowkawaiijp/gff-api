@@ -11,160 +11,160 @@ namespace Goodbye_F__king_File
         {
             Logger.Log(Logger.LogType.DEBUG, $"RemoveUsingfileRemover => filePath = '{filePath}'");
 
-            // ƒtƒ@ƒCƒ‹‚Ìê‡‚Í’¼Úíœ
+            // ãƒ•ã‚¡ã‚¤ãƒ«ã®å ´åˆã¯ç›´æ¥å‰Šé™¤
             if (!Directory.Exists(filePath))
             {
-                Logger.Log(Logger.LogType.DEBUG, $"'{filePath}' ‚Íƒtƒ@ƒCƒ‹‚Æ‚µ‚Ä”F¯‚³‚ê‚Ü‚µ‚½BFileRemover ƒCƒ“ƒXƒ^ƒ“ƒX‚ğ¶¬‚µ‚Ü‚·B");
+                Logger.Log(Logger.LogType.DEBUG, $"'{filePath}' ã¯ãƒ•ã‚¡ã‚¤ãƒ«ã¨ã—ã¦èªè­˜ã•ã‚Œã¾ã—ãŸã€‚FileRemover ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç”Ÿæˆã—ã¾ã™ã€‚");
                 var fileRemover = new FileRemover(filePath);
-                Logger.Log(Logger.LogType.DEBUG, $"FileRemover ‚ğ¶¬‚µ‚Ü‚µ‚½BŸ‚Éƒtƒ@ƒCƒ‹‚Ì—LŒø«‚ğŒŸØ‚µ‚Ü‚·B");
+                Logger.Log(Logger.LogType.DEBUG, $"FileRemover ã‚’ç”Ÿæˆã—ã¾ã—ãŸã€‚æ¬¡ã«ãƒ•ã‚¡ã‚¤ãƒ«ã®æœ‰åŠ¹æ€§ã‚’æ¤œè¨¼ã—ã¾ã™ã€‚");
                 if (fileRemover.VerifyIfItsValid())
                 {
-                    Logger.Log(Logger.LogType.DEBUG, $"ƒtƒ@ƒCƒ‹ '{filePath}' ‚ÌŒŸØ‚É¬Œ÷Bíœˆ—‚ğÀs‚µ‚Ü‚·B");
+                    Logger.Log(Logger.LogType.DEBUG, $"ãƒ•ã‚¡ã‚¤ãƒ« '{filePath}' ã®æ¤œè¨¼ã«æˆåŠŸã€‚å‰Šé™¤å‡¦ç†ã‚’å®Ÿè¡Œã—ã¾ã™ã€‚");
                     fileRemover.ForceRMFile();
-                    Logger.Log(Logger.LogType.DEBUG, $"ForceRMFile() ‚ÌÀs‚ªŠ®—¹‚µ‚Ü‚µ‚½B");
+                    Logger.Log(Logger.LogType.DEBUG, $"ForceRMFile() ã®å®Ÿè¡ŒãŒå®Œäº†ã—ã¾ã—ãŸã€‚");
                 }
                 else
                 {
-                    Logger.Log(Logger.LogType.DEBUG, $"ƒtƒ@ƒCƒ‹ '{filePath}' ‚ÌŒŸØ‚É¸”sBƒGƒ‰[“à—e‚ğƒƒOo—Í‚µ‚Ü‚·B");
-                    Logger.Log(Logger.LogType.ERROR, "ƒGƒ‰[: " + fileRemover.VerifyError);
+                    Logger.Log(Logger.LogType.DEBUG, $"ãƒ•ã‚¡ã‚¤ãƒ« '{filePath}' ã®æ¤œè¨¼ã«å¤±æ•—ã€‚ã‚¨ãƒ©ãƒ¼å†…å®¹ã‚’ãƒ­ã‚°å‡ºåŠ›ã—ã¾ã™ã€‚");
+                    Logger.Log(Logger.LogType.ERROR, "ã‚¨ãƒ©ãƒ¼: " + fileRemover.VerifyError);
 
                     if (Logger.ShowDebug)
                     {
-                        Logger.Log(Logger.LogType.INFO, "ƒfƒoƒbƒOƒ‚[ƒh‚ª—LŒø‰»‚³‚ê‚Ä‚¢‚é‚½‚ßAƒGƒ‰[‚ğ–³‹‚µ‚Äˆ—‚ğ‘±s‚µ‚Ü‚·B");
+                        Logger.Log(Logger.LogType.INFO, "ãƒ‡ãƒãƒƒã‚°ãƒ¢ãƒ¼ãƒ‰ãŒæœ‰åŠ¹åŒ–ã•ã‚Œã¦ã„ã‚‹ãŸã‚ã€ã‚¨ãƒ©ãƒ¼ã‚’ç„¡è¦–ã—ã¦å‡¦ç†ã‚’ç¶šè¡Œã—ã¾ã™ã€‚");
                         fileRemover.ForceRMFile();
-                        Logger.Log(Logger.LogType.DEBUG, $"ForceRMFile() ‚ÌÀs‚ªŠ®—¹‚µ‚Ü‚µ‚½B");
+                        Logger.Log(Logger.LogType.DEBUG, $"ForceRMFile() ã®å®Ÿè¡ŒãŒå®Œäº†ã—ã¾ã—ãŸã€‚");
                     }
                 }
                 return;
             }
 
-            Logger.Log(Logger.LogType.DEBUG, $"'{filePath}' ‚ÍƒfƒBƒŒƒNƒgƒŠ‚Æ‚µ‚Ä”F¯‚³‚ê‚Ü‚µ‚½BƒfƒBƒŒƒNƒgƒŠ“à‚Ìƒtƒ@ƒCƒ‹‚ğæ“¾‚µ‚Ü‚·B");
-            // ƒfƒBƒŒƒNƒgƒŠ‚Ìê‡‚ÍA‚Ü‚¸’¼‰º‚Ìƒtƒ@ƒCƒ‹‚ğíœ
+            Logger.Log(Logger.LogType.DEBUG, $"'{filePath}' ã¯ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã¨ã—ã¦èªè­˜ã•ã‚Œã¾ã—ãŸã€‚ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªå†…ã®ãƒ•ã‚¡ã‚¤ãƒ«ã‚’å–å¾—ã—ã¾ã™ã€‚");
+            // ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã®å ´åˆã¯ã€ã¾ãšç›´ä¸‹ã®ãƒ•ã‚¡ã‚¤ãƒ«ã‚’å‰Šé™¤
             string[] files = GetFilesInDirectory(filePath);
-            Logger.Log(Logger.LogType.DEBUG, $"GetFilesInDirectory Œ‹‰Ê: {FormatArrayForLog(files)}");
+            Logger.Log(Logger.LogType.DEBUG, $"GetFilesInDirectory çµæœ: {FormatArrayForLog(files)}");
             foreach (string file in files)
             {
-                Logger.Log(Logger.LogType.DEBUG, $"ƒfƒBƒŒƒNƒgƒŠ“à‚Ìƒtƒ@ƒCƒ‹‚ğÄ‹A“I‚Éˆ—‚µ‚Ü‚·: '{file}'");
-                // Ä‹AŒÄ‚Ño‚µiƒtƒ@ƒCƒ‹‚Ìê‡‚Íã‹Lˆ—‚ªÀs‚³‚ê‚éj
+                Logger.Log(Logger.LogType.DEBUG, $"ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªå†…ã®ãƒ•ã‚¡ã‚¤ãƒ«ã‚’å†å¸°çš„ã«å‡¦ç†ã—ã¾ã™: '{file}'");
+                // å†å¸°å‘¼ã³å‡ºã—ï¼ˆãƒ•ã‚¡ã‚¤ãƒ«ã®å ´åˆã¯ä¸Šè¨˜å‡¦ç†ãŒå®Ÿè¡Œã•ã‚Œã‚‹ï¼‰
                 RemoveUsingfileRemover(file);
             }
 
-            Logger.Log(Logger.LogType.DEBUG, $"ƒfƒBƒŒƒNƒgƒŠ '{filePath}' ‚ÌƒTƒuƒfƒBƒŒƒNƒgƒŠˆê——‚ğæ“¾‚µ‚Ü‚·B");
-            // Ÿ‚ÉAƒTƒuƒfƒBƒŒƒNƒgƒŠ‚ğÄ‹A“I‚Éˆ—
+            Logger.Log(Logger.LogType.DEBUG, $"ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª '{filePath}' ã®ã‚µãƒ–ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªä¸€è¦§ã‚’å–å¾—ã—ã¾ã™ã€‚");
+            // æ¬¡ã«ã€ã‚µãƒ–ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‚’å†å¸°çš„ã«å‡¦ç†
             string[] subDirectories = GetDirectoriesInDirectory(filePath);
-            Logger.Log(Logger.LogType.DEBUG, $"GetDirectoriesInDirectory Œ‹‰Ê: {FormatArrayForLog(subDirectories)}");
+            Logger.Log(Logger.LogType.DEBUG, $"GetDirectoriesInDirectory çµæœ: {FormatArrayForLog(subDirectories)}");
             foreach (string subDir in subDirectories)
             {
-                Logger.Log(Logger.LogType.DEBUG, $"ƒTƒuƒfƒBƒŒƒNƒgƒŠ‚ğÄ‹A“I‚Éˆ—‚µ‚Ü‚·: '{subDir}'");
+                Logger.Log(Logger.LogType.DEBUG, $"ã‚µãƒ–ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‚’å†å¸°çš„ã«å‡¦ç†ã—ã¾ã™: '{subDir}'");
                 RemoveUsingfileRemover(subDir);
             }
 
-            // ‘S‚Ä‚Ì’†g‚ªíœ‚Å‚«‚½‚Ì‚ÅAŒ»İ‚ÌƒfƒBƒŒƒNƒgƒŠ‚ğíœ
-            Logger.Log(Logger.LogType.DEBUG, $"‘S‚Ä‚Ì’†g‚Ìíœ‚ªŠ®—¹BƒfƒBƒŒƒNƒgƒŠ '{filePath}' ‚Ìíœ‚ğ‚İ‚Ü‚·B");
+            // å…¨ã¦ã®ä¸­èº«ãŒå‰Šé™¤ã§ããŸã®ã§ã€ç¾åœ¨ã®ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‚’å‰Šé™¤
+            Logger.Log(Logger.LogType.DEBUG, $"å…¨ã¦ã®ä¸­èº«ã®å‰Šé™¤ãŒå®Œäº†ã€‚ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª '{filePath}' ã®å‰Šé™¤ã‚’è©¦ã¿ã¾ã™ã€‚");
             try
             {
                 Directory.Delete(filePath, false);
-                Logger.Log(Logger.LogType.DEBUG, $"ƒfƒBƒŒƒNƒgƒŠ '{filePath}' ‚Ìíœ‚É¬Œ÷‚µ‚Ü‚µ‚½B");
+                Logger.Log(Logger.LogType.DEBUG, $"ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª '{filePath}' ã®å‰Šé™¤ã«æˆåŠŸã—ã¾ã—ãŸã€‚");
             }
             catch (Exception e)
             {
-                Logger.Log(Logger.LogType.ERROR, $"ƒfƒBƒŒƒNƒgƒŠ '{filePath}' ‚Ìíœ‚É¸”s‚µ‚Ü‚µ‚½BƒGƒ‰[: {e.Message}");
-                Logger.Log(Logger.LogType.DEBUG, $"—áŠOÚ×: {e}");
+                Logger.Log(Logger.LogType.ERROR, $"ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª '{filePath}' ã®å‰Šé™¤ã«å¤±æ•—ã—ã¾ã—ãŸã€‚ã‚¨ãƒ©ãƒ¼: {e.Message}");
+                Logger.Log(Logger.LogType.DEBUG, $"ä¾‹å¤–è©³ç´°: {e}");
             }
         }
 
-        // w’è‚µ‚½ƒfƒBƒŒƒNƒgƒŠ’¼‰º‚Ìƒtƒ@ƒCƒ‹ˆê——‚ğæ“¾‚·‚é
+        // æŒ‡å®šã—ãŸãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªç›´ä¸‹ã®ãƒ•ã‚¡ã‚¤ãƒ«ä¸€è¦§ã‚’å–å¾—ã™ã‚‹
         private static string[] GetFilesInDirectory(string path)
         {
-            Logger.Log(Logger.LogType.DEBUG, $"GetFilesInDirectory ŠJn: path = '{path}'");
+            Logger.Log(Logger.LogType.DEBUG, $"GetFilesInDirectory é–‹å§‹: path = '{path}'");
             try
             {
                 string[] files = Directory.GetFiles(path, "*");
-                Logger.Log(Logger.LogType.DEBUG, $"ƒfƒBƒŒƒNƒgƒŠ '{path}' ‚Ìƒtƒ@ƒCƒ‹æ“¾‚É¬Œ÷Bæ“¾Œ”: {files.Length}. “à—e: {FormatArrayForLog(files)}");
+                Logger.Log(Logger.LogType.DEBUG, $"ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª '{path}' ã®ãƒ•ã‚¡ã‚¤ãƒ«å–å¾—ã«æˆåŠŸã€‚å–å¾—ä»¶æ•°: {files.Length}. å†…å®¹: {FormatArrayForLog(files)}");
                 return files;
             }
             catch (UnauthorizedAccessException ex)
             {
-                Logger.Log(Logger.LogType.ERROR, $"ƒfƒBƒŒƒNƒgƒŠ '{path}' ‚Ìƒtƒ@ƒCƒ‹æ“¾‚ÉƒAƒNƒZƒX‹‘”Û‚ª”­¶‚µ‚Ü‚µ‚½BƒGƒ‰[: {ex.Message}");
-                Logger.Log(Logger.LogType.DEBUG, $"ƒAƒNƒZƒX‹‘”Û—áŠO”­¶BŒ ŒÀC³‚ğ‚İ‚Ü‚·B path = '{path}'");
+                Logger.Log(Logger.LogType.ERROR, $"ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª '{path}' ã®ãƒ•ã‚¡ã‚¤ãƒ«å–å¾—ã«ã‚¢ã‚¯ã‚»ã‚¹æ‹’å¦ãŒç™ºç”Ÿã—ã¾ã—ãŸã€‚ã‚¨ãƒ©ãƒ¼: {ex.Message}");
+                Logger.Log(Logger.LogType.DEBUG, $"ã‚¢ã‚¯ã‚»ã‚¹æ‹’å¦ä¾‹å¤–ç™ºç”Ÿã€‚æ¨©é™ä¿®æ­£ã‚’è©¦ã¿ã¾ã™ã€‚ path = '{path}'");
                 FixDirectoryPermissions(path);
                 try
                 {
                     string[] files = Directory.GetFiles(path, "*");
-                    Logger.Log(Logger.LogType.DEBUG, $"Œ ŒÀC³ŒãAƒfƒBƒŒƒNƒgƒŠ '{path}' ‚Ìƒtƒ@ƒCƒ‹æ“¾‚É¬Œ÷Bæ“¾Œ”: {files.Length}. “à—e: {FormatArrayForLog(files)}");
+                    Logger.Log(Logger.LogType.DEBUG, $"æ¨©é™ä¿®æ­£å¾Œã€ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª '{path}' ã®ãƒ•ã‚¡ã‚¤ãƒ«å–å¾—ã«æˆåŠŸã€‚å–å¾—ä»¶æ•°: {files.Length}. å†…å®¹: {FormatArrayForLog(files)}");
                     return files;
                 }
                 catch (Exception ex2)
                 {
-                    Logger.Log(Logger.LogType.ERROR, $"Œ ŒÀC³Œã‚àƒfƒBƒŒƒNƒgƒŠ '{path}' ‚Ìƒtƒ@ƒCƒ‹æ“¾‚É¸”s‚µ‚Ü‚µ‚½BƒGƒ‰[: {ex2.Message}");
-                    Logger.Log(Logger.LogType.DEBUG, $"Äs¸”sB—áŠOÚ×: {ex2}");
+                    Logger.Log(Logger.LogType.ERROR, $"æ¨©é™ä¿®æ­£å¾Œã‚‚ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª '{path}' ã®ãƒ•ã‚¡ã‚¤ãƒ«å–å¾—ã«å¤±æ•—ã—ã¾ã—ãŸã€‚ã‚¨ãƒ©ãƒ¼: {ex2.Message}");
+                    Logger.Log(Logger.LogType.DEBUG, $"å†è©¦è¡Œå¤±æ•—ã€‚ä¾‹å¤–è©³ç´°: {ex2}");
                     return new string[0];
                 }
             }
             catch (Exception ex)
             {
-                Logger.Log(Logger.LogType.ERROR, $"ƒfƒBƒŒƒNƒgƒŠ '{path}' ‚Ìƒtƒ@ƒCƒ‹æ“¾‚É¸”s‚µ‚Ü‚µ‚½BƒGƒ‰[: {ex.Message}");
-                Logger.Log(Logger.LogType.DEBUG, $"ˆê”Ê—áŠO”­¶B—áŠOÚ×: {ex}");
+                Logger.Log(Logger.LogType.ERROR, $"ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª '{path}' ã®ãƒ•ã‚¡ã‚¤ãƒ«å–å¾—ã«å¤±æ•—ã—ã¾ã—ãŸã€‚ã‚¨ãƒ©ãƒ¼: {ex.Message}");
+                Logger.Log(Logger.LogType.DEBUG, $"ä¸€èˆ¬ä¾‹å¤–ç™ºç”Ÿã€‚ä¾‹å¤–è©³ç´°: {ex}");
                 return new string[0];
             }
         }
 
-        // w’è‚µ‚½ƒfƒBƒŒƒNƒgƒŠ’¼‰º‚ÌƒTƒuƒfƒBƒŒƒNƒgƒŠˆê——‚ğæ“¾‚·‚é
+        // æŒ‡å®šã—ãŸãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªç›´ä¸‹ã®ã‚µãƒ–ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªä¸€è¦§ã‚’å–å¾—ã™ã‚‹
         private static string[] GetDirectoriesInDirectory(string path)
         {
-            Logger.Log(Logger.LogType.DEBUG, $"GetDirectoriesInDirectory ŠJn: path = '{path}'");
+            Logger.Log(Logger.LogType.DEBUG, $"GetDirectoriesInDirectory é–‹å§‹: path = '{path}'");
             try
             {
                 string[] directories = Directory.GetDirectories(path);
-                Logger.Log(Logger.LogType.DEBUG, $"ƒfƒBƒŒƒNƒgƒŠ '{path}' ‚ÌƒTƒuƒfƒBƒŒƒNƒgƒŠæ“¾‚É¬Œ÷BŒ”: {directories.Length} / “à—e: {FormatArrayForLog(directories)}");
+                Logger.Log(Logger.LogType.DEBUG, $"ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª '{path}' ã®ã‚µãƒ–ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªå–å¾—ã«æˆåŠŸã€‚ä»¶æ•°: {directories.Length} / å†…å®¹: {FormatArrayForLog(directories)}");
                 return directories;
             }
             catch (UnauthorizedAccessException ex)
             {
-                Logger.Log(Logger.LogType.ERROR, $"ƒfƒBƒŒƒNƒgƒŠ '{path}' ‚ÌƒTƒuƒfƒBƒŒƒNƒgƒŠæ“¾‚ÉƒAƒNƒZƒX‹‘”Û‚ª”­¶‚µ‚Ü‚µ‚½BƒGƒ‰[: {ex.Message}");
-                Logger.Log(Logger.LogType.DEBUG, $"ƒAƒNƒZƒX‹‘”Û—áŠO”­¶BŒ ŒÀC³‚ğ‚İ‚Ü‚·B path = '{path}'");
+                Logger.Log(Logger.LogType.ERROR, $"ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª '{path}' ã®ã‚µãƒ–ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªå–å¾—ã«ã‚¢ã‚¯ã‚»ã‚¹æ‹’å¦ãŒç™ºç”Ÿã—ã¾ã—ãŸã€‚ã‚¨ãƒ©ãƒ¼: {ex.Message}");
+                Logger.Log(Logger.LogType.DEBUG, $"ã‚¢ã‚¯ã‚»ã‚¹æ‹’å¦ä¾‹å¤–ç™ºç”Ÿã€‚æ¨©é™ä¿®æ­£ã‚’è©¦ã¿ã¾ã™ã€‚ path = '{path}'");
                 FixDirectoryPermissions(path);
                 try
                 {
                     string[] directories = Directory.GetDirectories(path);
-                    Logger.Log(Logger.LogType.DEBUG, $"Œ ŒÀC³ŒãAƒfƒBƒŒƒNƒgƒŠ '{path}' ‚ÌƒTƒuƒfƒBƒŒƒNƒgƒŠæ“¾‚É¬Œ÷BŒ”: {directories.Length} / “à—e: {FormatArrayForLog(directories)}");
+                    Logger.Log(Logger.LogType.DEBUG, $"æ¨©é™ä¿®æ­£å¾Œã€ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª '{path}' ã®ã‚µãƒ–ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªå–å¾—ã«æˆåŠŸã€‚ä»¶æ•°: {directories.Length} / å†…å®¹: {FormatArrayForLog(directories)}");
                     return directories;
                 }
                 catch (Exception ex2)
                 {
-                    Logger.Log(Logger.LogType.ERROR, $"Œ ŒÀC³Œã‚àƒfƒBƒŒƒNƒgƒŠ '{path}' ‚ÌƒTƒuƒfƒBƒŒƒNƒgƒŠæ“¾‚É¸”s‚µ‚Ü‚µ‚½BƒGƒ‰[: {ex2.Message}");
-                    Logger.Log(Logger.LogType.DEBUG, $"Äs¸”sB—áŠOÚ×: {ex2}");
+                    Logger.Log(Logger.LogType.ERROR, $"æ¨©é™ä¿®æ­£å¾Œã‚‚ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª '{path}' ã®ã‚µãƒ–ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªå–å¾—ã«å¤±æ•—ã—ã¾ã—ãŸã€‚ã‚¨ãƒ©ãƒ¼: {ex2.Message}");
+                    Logger.Log(Logger.LogType.DEBUG, $"å†è©¦è¡Œå¤±æ•—ã€‚ä¾‹å¤–è©³ç´°: {ex2}");
                     return new string[0];
                 }
             }
             catch (Exception ex)
             {
-                Logger.Log(Logger.LogType.ERROR, $"ƒfƒBƒŒƒNƒgƒŠ '{path}' ‚ÌƒTƒuƒfƒBƒŒƒNƒgƒŠæ“¾‚É¸”s‚µ‚Ü‚µ‚½BƒGƒ‰[: {ex.Message}");
-                Logger.Log(Logger.LogType.DEBUG, $"ˆê”Ê—áŠO”­¶B—áŠOÚ×: {ex}");
+                Logger.Log(Logger.LogType.ERROR, $"ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª '{path}' ã®ã‚µãƒ–ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªå–å¾—ã«å¤±æ•—ã—ã¾ã—ãŸã€‚ã‚¨ãƒ©ãƒ¼: {ex.Message}");
+                Logger.Log(Logger.LogType.DEBUG, $"ä¸€èˆ¬ä¾‹å¤–ç™ºç”Ÿã€‚ä¾‹å¤–è©³ç´°: {ex}");
                 return new string[0];
             }
         }
 
-        // TrustedInstaller ‚Éƒtƒ‹ƒRƒ“ƒgƒ[ƒ‹‚ÌƒAƒNƒZƒXŒ ‚ğ•t—^
+        // TrustedInstaller ã«ãƒ•ãƒ«ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã®ã‚¢ã‚¯ã‚»ã‚¹æ¨©ã‚’ä»˜ä¸
         private static void FixDirectoryPermissions(string path)
         {
-            Logger.Log(Logger.LogType.DEBUG, $"FixDirectoryPermissions ŠJn: path = '{path}'");
+            Logger.Log(Logger.LogType.DEBUG, $"FixDirectoryPermissions é–‹å§‹: path = '{path}'");
             try
             {
                 DirectoryInfo di = new DirectoryInfo(path);
-                Logger.Log(Logger.LogType.DEBUG, $"DirectoryInfo ‚ğì¬‚µ‚Ü‚µ‚½: '{path}'");
+                Logger.Log(Logger.LogType.DEBUG, $"DirectoryInfo ã‚’ä½œæˆã—ã¾ã—ãŸ: '{path}'");
                 DirectorySecurity ds = di.GetAccessControl();
-                Logger.Log(Logger.LogType.DEBUG, $"DirectorySecurity ‚ğæ“¾‚µ‚Ü‚µ‚½: '{path}'");
+                Logger.Log(Logger.LogType.DEBUG, $"DirectorySecurity ã‚’å–å¾—ã—ã¾ã—ãŸ: '{path}'");
 
-                // TrustedInstaller ‚Ì NTAccount ‚ğæ“¾
+                // TrustedInstaller ã® NTAccount ã‚’å–å¾—
                 var trustedInstaller = new NTAccount("NT SERVICE", "TrustedInstaller");
-                Logger.Log(Logger.LogType.DEBUG, $"NTAccount (TrustedInstaller) ‚ğ¶¬‚µ‚Ü‚µ‚½B");
+                Logger.Log(Logger.LogType.DEBUG, $"NTAccount (TrustedInstaller) ã‚’ç”Ÿæˆã—ã¾ã—ãŸã€‚");
 
-                // Š—LÒ‚Ìİ’è
+                // æ‰€æœ‰è€…ã®è¨­å®š
                 ds.SetOwner(trustedInstaller);
-                Logger.Log(Logger.LogType.DEBUG, $"Š—LÒ‚ğ TrustedInstaller ‚Éİ’è‚µ‚Ü‚µ‚½B");
+                Logger.Log(Logger.LogType.DEBUG, $"æ‰€æœ‰è€…ã‚’ TrustedInstaller ã«è¨­å®šã—ã¾ã—ãŸã€‚");
 
-                // TrustedInstaller ‚Éƒtƒ‹ƒRƒ“ƒgƒ[ƒ‹‚ğ•t—^
+                // TrustedInstaller ã«ãƒ•ãƒ«ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã‚’ä»˜ä¸
                 var accessRule = new FileSystemAccessRule(
                     trustedInstaller,
                     FileSystemRights.FullControl,
@@ -173,20 +173,20 @@ namespace Goodbye_F__king_File
                     AccessControlType.Allow);
 
                 ds.AddAccessRule(accessRule);
-                Logger.Log(Logger.LogType.DEBUG, $"TrustedInstaller ‚Éƒtƒ‹ƒRƒ“ƒgƒ[ƒ‹Œ ŒÀ‚ğ•t—^‚·‚éƒ‹[ƒ‹‚ğ’Ç‰Á‚µ‚Ü‚µ‚½B");
+                Logger.Log(Logger.LogType.DEBUG, $"TrustedInstaller ã«ãƒ•ãƒ«ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«æ¨©é™ã‚’ä»˜ä¸ã™ã‚‹ãƒ«ãƒ¼ãƒ«ã‚’è¿½åŠ ã—ã¾ã—ãŸã€‚");
 
                 di.SetAccessControl(ds);
-                Logger.Log(Logger.LogType.INFO, $"ƒfƒBƒŒƒNƒgƒŠ '{path}' ‚ÌŠ—LÒ‚¨‚æ‚ÑŒ ŒÀ‚ğ TrustedInstaller ‚ÉC³‚µ‚Ü‚µ‚½B");
-                Logger.Log(Logger.LogType.DEBUG, $"FixDirectoryPermissions ˆ—‚ª³í‚ÉŠ®—¹‚µ‚Ü‚µ‚½: '{path}'");
+                Logger.Log(Logger.LogType.INFO, $"ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª '{path}' ã®æ‰€æœ‰è€…ãŠã‚ˆã³æ¨©é™ã‚’ TrustedInstaller ã«ä¿®æ­£ã—ã¾ã—ãŸã€‚");
+                Logger.Log(Logger.LogType.DEBUG, $"FixDirectoryPermissions å‡¦ç†ãŒæ­£å¸¸ã«å®Œäº†ã—ã¾ã—ãŸ: '{path}'");
             }
             catch (Exception e)
             {
-                Logger.Log(Logger.LogType.ERROR, $"ƒfƒBƒŒƒNƒgƒŠ '{path}' ‚ÌŒ ŒÀC³‚É¸”s‚µ‚Ü‚µ‚½BƒGƒ‰[: {e.Message}");
-                Logger.Log(Logger.LogType.DEBUG, $"FixDirectoryPermissions —áŠOÚ×: {e}");
+                Logger.Log(Logger.LogType.ERROR, $"ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª '{path}' ã®æ¨©é™ä¿®æ­£ã«å¤±æ•—ã—ã¾ã—ãŸã€‚ã‚¨ãƒ©ãƒ¼: {e.Message}");
+                Logger.Log(Logger.LogType.DEBUG, $"FixDirectoryPermissions ä¾‹å¤–è©³ç´°: {e}");
             }
         }
 
-        // ”z—ñ‚Ì“à—e‚ğƒƒOo—Í—p‚ÉƒtƒH[ƒ}ƒbƒg
+        // é…åˆ—ã®å†…å®¹ã‚’ãƒ­ã‚°å‡ºåŠ›ç”¨ã«ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆ
         private static string FormatArrayForLog(string[] array)
         {
             if (array == null)
@@ -205,7 +205,7 @@ namespace Goodbye_F__king_File
             }
             if (array.Length > maxItems)
             {
-                result += $", ...i{array.Length - maxItems} ŒÈ—ªj";
+                result += $", ...ï¼ˆ{array.Length - maxItems} ä»¶çœç•¥ï¼‰";
             }
             result += "]";
             return result;

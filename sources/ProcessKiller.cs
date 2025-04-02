@@ -7,7 +7,7 @@ namespace Goodbye_F__king_File
 {
     public class ProcessKiller
     {
-        // P/Invoke éŒ¾: ƒg[ƒNƒ“‘€ì—p
+        // P/Invoke å®£è¨€: ãƒˆãƒ¼ã‚¯ãƒ³æ“ä½œç”¨
         [DllImport("advapi32.dll", SetLastError = true)]
         public static extern bool OpenProcessToken(IntPtr ProcessHandle, uint DesiredAccess, out IntPtr TokenHandle);
 
@@ -36,7 +36,7 @@ namespace Goodbye_F__king_File
         const uint TOKEN_QUERY = 0x0008;
         const uint SE_PRIVILEGE_ENABLED = 0x00000002;
 
-        // P/Invoke éŒ¾: ƒvƒƒZƒX‘€ì—p
+        // P/Invoke å®£è¨€: ãƒ—ãƒ­ã‚»ã‚¹æ“ä½œç”¨
         [DllImport("kernel32.dll", SetLastError = true)]
         public static extern IntPtr OpenProcess(uint processAccess, bool bInheritHandle, int processId);
 
@@ -45,18 +45,18 @@ namespace Goodbye_F__king_File
         [DllImport("kernel32.dll", SetLastError = true)]
         public static extern bool TerminateProcess(IntPtr hProcess, uint uExitCode);
 
-        // SeDebugPrivilege ‚ğ—LŒø‰»
+        // SeDebugPrivilege ã‚’æœ‰åŠ¹åŒ–
         public static bool EnableDebugPrivilege()
         {
             if (!OpenProcessToken(Process.GetCurrentProcess().Handle, TOKEN_ADJUST_PRIVILEGES | TOKEN_QUERY, out IntPtr hToken))
             {
-                Logger.Log(Logger.LogType.ERROR, "OpenProcessToken ‚ÌŒÄ‚Ño‚µ‚É¸”s‚µ‚Ü‚µ‚½B");
+                Logger.Log(Logger.LogType.ERROR, "OpenProcessToken ã®å‘¼ã³å‡ºã—ã«å¤±æ•—ã—ã¾ã—ãŸã€‚");
                 return false;
             }
 
             if (!LookupPrivilegeValue(null, "SeDebugPrivilege", out LUID luid))
             {
-                Logger.Log(Logger.LogType.ERROR, "LookupPrivilegeValue ‚ÌŒÄ‚Ño‚µ‚É¸”s‚µ‚Ü‚µ‚½B");
+                Logger.Log(Logger.LogType.ERROR, "LookupPrivilegeValue ã®å‘¼ã³å‡ºã—ã«å¤±æ•—ã—ã¾ã—ãŸã€‚");
                 return false;
             }
 
@@ -66,36 +66,36 @@ namespace Goodbye_F__king_File
             tp.Attributes = SE_PRIVILEGE_ENABLED;
             if (!AdjustTokenPrivileges(hToken, false, ref tp, 0, IntPtr.Zero, IntPtr.Zero))
             {
-                Logger.Log(Logger.LogType.ERROR, "AdjustTokenPrivileges ‚ÌŒÄ‚Ño‚µ‚É¸”s‚µ‚Ü‚µ‚½B");
+                Logger.Log(Logger.LogType.ERROR, "AdjustTokenPrivileges ã®å‘¼ã³å‡ºã—ã«å¤±æ•—ã—ã¾ã—ãŸã€‚");
                 return false;
             }
             return true;
         }
 
-        // w’è‚³‚ê‚½ƒvƒƒZƒX‚ğ‹­§I—¹
+        // æŒ‡å®šã•ã‚ŒãŸãƒ—ãƒ­ã‚»ã‚¹ã‚’å¼·åˆ¶çµ‚äº†
         public static void ForceKillProcess(Process proc)
         {
-            // ‚Ü‚¸‚ÍƒfƒoƒbƒO“ÁŒ ‚ğ—LŒø‰»
+            // ã¾ãšã¯ãƒ‡ãƒãƒƒã‚°ç‰¹æ¨©ã‚’æœ‰åŠ¹åŒ–
             if (!EnableDebugPrivilege())
             {
-                Logger.Log(Logger.LogType.ERROR, "ƒfƒoƒbƒO“ÁŒ ‚Ì—LŒø‰»‚É¸”s‚µ‚Ü‚µ‚½B");
+                Logger.Log(Logger.LogType.ERROR, "ãƒ‡ãƒãƒƒã‚°ç‰¹æ¨©ã®æœ‰åŠ¹åŒ–ã«å¤±æ•—ã—ã¾ã—ãŸã€‚");
                 return;
             }
 
             IntPtr hProcess = OpenProcess(PROCESS_TERMINATE, false, proc.Id);
             if (hProcess == IntPtr.Zero)
             {
-                Logger.Log(Logger.LogType.ERROR, $"ƒvƒƒZƒX {proc.Id} ‚ğƒI[ƒvƒ“‚Å‚«‚Ü‚¹‚ñ‚Å‚µ‚½B");
+                Logger.Log(Logger.LogType.ERROR, $"ãƒ—ãƒ­ã‚»ã‚¹ {proc.Id} ã‚’ã‚ªãƒ¼ãƒ—ãƒ³ã§ãã¾ã›ã‚“ã§ã—ãŸã€‚");
                 return;
             }
 
             if (!TerminateProcess(hProcess, 1))
             {
-                Logger.Log(Logger.LogType.ERROR, $"ƒvƒƒZƒX {proc.Id} ‚Ì‹­§I—¹‚É¸”s‚µ‚Ü‚µ‚½B");
+                Logger.Log(Logger.LogType.ERROR, $"ãƒ—ãƒ­ã‚»ã‚¹ {proc.Id} ã®å¼·åˆ¶çµ‚äº†ã«å¤±æ•—ã—ã¾ã—ãŸã€‚");
             }
             else
             {
-                Logger.Log(Logger.LogType.INFO, $"ƒvƒƒZƒX {proc.Id} ‚ğ‹­§I—¹‚µ‚Ü‚µ‚½B");
+                Logger.Log(Logger.LogType.INFO, $"ãƒ—ãƒ­ã‚»ã‚¹ {proc.Id} ã‚’å¼·åˆ¶çµ‚äº†ã—ã¾ã—ãŸã€‚");
                 Thread.Sleep(200);
             }
         }

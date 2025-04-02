@@ -1,0 +1,36 @@
+name: Build
+
+on:
+  push:
+    path:
+    - 'sources/*'
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build
+    runs-on: windows-latest
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Add msbuild to PATH
+        uses: microsoft/setup-msbuild@v2
+        with:
+          msbuild-architecture: x64
+    
+      - name: MSBuild
+        working-directory: sources
+        run: |
+          msbuild /t:Restore
+          msbuild -property:Configuration=Debug
+          Write-Output "commit=$("${{ github.sha }}".Substring(0,7))"| Out-File -FilePath $Env:GITHUB_ENV -Encoding UTF8 -Append
+          
+      - name: Upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: gff@${{ env.commit }}
+          path: sources/bin/Debug/net472/gff.exe
+          if-no-files-found: error

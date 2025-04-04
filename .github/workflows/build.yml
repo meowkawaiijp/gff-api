@@ -25,7 +25,7 @@ jobs:
         working-directory: sources
         run: |
           msbuild /t:Restore
-          msbuild -property:Configuration=Debug -unsafe
+          msbuild -property:Configuration=Debug
           Write-Output "commit=$("${{ github.sha }}".Substring(0,7))"| Out-File -FilePath $Env:GITHUB_ENV -Encoding UTF8 -Append
           
       - name: Upload

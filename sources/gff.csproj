@@ -6,6 +6,7 @@
     <AssemblyName>gff</AssemblyName>
     <ApplicationIcon>..\icons\icon.ico</ApplicationIcon>
     <LangVersion>latest</LangVersion>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
   <ItemGroup>

@@ -183,8 +183,17 @@ namespace Goodbye_F__king_File
                 return;
             }
 
-            filePath = string.Join(" ", args);
+            // 特権を有効化
+            if (!TrustedInstallerRunner.EnablePrivilege("SeManageVolumePrivilege") ||
+                !TrustedInstallerRunner.EnablePrivilege("SeTakeOwnershipPrivilege") ||
+                !TrustedInstallerRunner.EnablePrivilege("SeBackupPrivilege") ||
+                !TrustedInstallerRunner.EnablePrivilege("SeRestorePrivilege"))
+            {
+                Logger.Log(Logger.LogType.ERROR, "必要な特権の有効化に失敗しました。");
+                return;
+            }
 
+            filePath = string.Join(" ", args);
             FileAndDirectoryProcessor.RemoveUsingfileRemover(filePath);
         }
         static bool VerifyAllowedDangerOps()
@@ -203,7 +212,7 @@ namespace Goodbye_F__king_File
                         return true;
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Logger.Log(Logger.LogType.ERROR, $"README.md の読み取りに失敗しました: {e.Message}");
             }
@@ -231,13 +240,36 @@ namespace Goodbye_F__king_File
             }
             return false;
         }
+        public static bool CheckIfIrreversibleOverrideIsAllowed()
+        {
+            try
+            {
+                string readmefp = Path.GetFullPath(@".\README.md");
+                if (!File.Exists(readmefp))
+                {
+                    InitREADME();
+                    return false;
+                }
+                foreach (string line in File.ReadAllLines(readmefp))
+                {
+                    if (line.Trim().StartsWith("EnableIrreversibleOverride", StringComparison.OrdinalIgnoreCase))
+                        return true;
+                }
+            }
+            catch (Exception e)
+            {
+                Logger.Log(Logger.LogType.ERROR, $"README.md の読み取りに失敗しました: {e.Message}");
+            }
+            return false;
+        }
         static void InitREADME()
         {
             File.WriteAllText(@".\README.md",
                 "This README.md is auto-generated;" + Environment.NewLine +
                 Environment.NewLine +
                 "# ShowDebugMessages" + Environment.NewLine +
-                "# AllowDangerOperation" + Environment.NewLine
+                "# AllowDangerOperation" + Environment.NewLine +
+                "# EnableIrreversibleOverride" + Environment.NewLine
             );
         }
         static bool IsDriveRoot(string path)
@@ -245,6 +277,24 @@ namespace Goodbye_F__king_File
             string fullPath = Path.GetFullPath(path).TrimEnd('\\') + "\\";
             string root = Path.GetPathRoot(fullPath);
             return string.Equals(fullPath, root, StringComparison.OrdinalIgnoreCase);
+        }
+        public static void ShowWhoamiIfDebug()
+        {
+            // デバッグ用
+            if (Logger.ShowDebug)
+            {
+                Logger.Log(Logger.LogType.DEBUG, "現在の権限(whoami/priv):");
+                ProcessStartInfo psi = new ProcessStartInfo("whoami", "/priv")
+                {
+                    RedirectStandardOutput = true,
+                    UseShellExecute = false,
+                    CreateNoWindow = true
+                };
+                Process process = Process.Start(psi);
+                string output = process.StandardOutput.ReadToEnd();
+                process.WaitForExit();
+                Console.WriteLine(output);
+            }
         }
         static bool CallMySelfRunAs(string file, string arg, bool BypassUAC)
         {
@@ -262,7 +312,7 @@ namespace Goodbye_F__king_File
                         }
 
                         key.SetValue("DelegateExecute", "", RegistryValueKind.String);
-                        key.SetValue("", "\"" + file + "\" "+ arg, RegistryValueKind.String);
+                        key.SetValue("", "\"" + file + "\" " + arg, RegistryValueKind.String);
                     }
 
                     // UAC を bypass する
@@ -324,7 +374,7 @@ namespace Goodbye_F__king_File
             }
             catch (ArgumentException)
             {
-            
+
             }
 
             if (parentProcess != null && parentProcess.ProcessName.ToLower().Contains("cmd"))

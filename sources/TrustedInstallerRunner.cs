@@ -191,7 +191,7 @@ namespace Goodbye_F__king_File
         #region 内部処理
 
         // 必要な特権を有効化する
-        static bool EnablePrivilege(string privilegeName)
+        public static bool EnablePrivilege(string privilegeName)
         {
             if (!OpenProcessToken(System.Diagnostics.Process.GetCurrentProcess().Handle, TOKEN_ADJUST_PRIVILEGES | TOKEN_QUERY, out IntPtr hToken))
             {
@@ -382,6 +382,7 @@ namespace Goodbye_F__king_File
                 Logger.Log(Logger.LogType.ERROR, "[CreateProcessAsTrustedInstaller] 必要な特権の有効化に失敗しました。");
                 return pi;
             }
+
             // システムにインパーソネート
             ImpersonateSystem();
 

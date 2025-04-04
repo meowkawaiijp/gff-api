@@ -67,8 +67,30 @@ namespace Goodbye_F__king_File
 
             // QuickUnlink による初回削除試行
             Logger.Log(Logger.LogType.DEBUG, "QuickUnlink による削除試行を開始します...");
-            Logger.LogNotNewLine(Logger.LogType.INFO, "QuickUnlink " + _FilePath + " ");
-            int resultQuickUnlink = QuickUnlink();
+            int resultQuickUnlink;
+
+            var IrreversibleOverride = Program.CheckIfIrreversibleOverrideIsAllowed();
+
+            if (!IrreversibleOverride)
+            {
+                Logger.LogNotNewLine(Logger.LogType.INFO, "QuickUnlink " + _FilePath + " ");
+                resultQuickUnlink = QuickUnlink();
+            }
+            else
+            {
+                if (Logger.ShowDebug)
+                    Logger.Log(Logger.LogType.INFO, "QuickUnlink[IrreversibleOverride] " + _FilePath + " ");
+                else
+                    Logger.LogNotNewLine(Logger.LogType.INFO, "QuickUnlink[IrreversibleOverride] " + _FilePath + " ");
+                int _resultQuickUnlink = IrreversibleOverrideHandler.IrreversibleQuickUnlink(_FilePath);
+                if (_resultQuickUnlink == 0)
+                    resultQuickUnlink = 0;
+                else
+                {
+                    Logger.LogNotNewLine(Logger.LogType.INFO, "ReQuickUnlink " + _FilePath + " ");
+                    resultQuickUnlink = QuickUnlink();
+                }
+            }
 
             switch (resultQuickUnlink)
             {
@@ -92,6 +114,9 @@ namespace Goodbye_F__king_File
                     break;
                 case 6:
                     Logger.LogNotNewLine_Next("-> [UnauthorizedAccessException] 必要な権限がありません。または、実行中の実行可能ファイル、ディレクトリ、読み取り専用ファイルが指定されています。");
+                    break;
+                case 7:
+                    Logger.LogNotNewLine_Next("-> [NotSupportedFormatException] NTFS / FAT32 以外のフォーマットに IrreversibleOverride は対応していません。");
                     break;
                 default:
                     Logger.LogNotNewLine_Next("-> [Exception] 不明なエラーが発生しました。");
